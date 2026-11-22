@@ -1214,7 +1214,12 @@ $('#again').addEventListener('click', () => { thanks.hidden = true; form.hidden 
    ENCUADRES guarda el punto de enfoque publicado de cada foto (ruta → "x% y%").
    Para ajustarlas: abre la web con ?editar al final de la dirección, arrastra cada
    foto hasta que quede bien centrada y pulsa «Copiar ajustes». */
-const ENCUADRES = {};
+const ENCUADRES = {
+  'https://i.pinimg.com/1200x/63/48/5a/63485a28d1a5906d9749bc3ee01bae5f.jpg': '81.6% 50%',
+  'https://i.pinimg.com/1200x/10/d0/3f/10d03fcf4dbb93851f2df080e58e93f8.jpg': '89.2% 50%',
+  'https://i.pinimg.com/1200x/cd/10/62/cd1062b567ec07f2a59f5109a511046e.jpg': '78.1% 50%',
+  'https://i.pinimg.com/1200x/c4/3d/27/c43d27263d095b251fd48e1a96641d0f.jpg': '45.8% 50%'
+};
 const FRAME_KEY = 'mel-encuadres';
 const EDIT = new URLSearchParams(location.search).has('editar');
 let edits = {};
