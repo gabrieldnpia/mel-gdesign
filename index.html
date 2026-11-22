@@ -17,7 +17,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://i.pinimg.com">
-<link rel="preconnect" href="https://mir-s3-cdn-cf.behance.net">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500..700&family=Inter:wght@400..800&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.replace('no-js','js')</script>
 <style>
@@ -675,7 +674,7 @@ fieldset.f{border:0;margin:0;padding:0}
     </div>
     <div class="stamps" data-reveal role="list" aria-label="Países con marcas de Mel">
       <span class="stamp s1" role="listitem"><small>Caracas</small>Venezuela<i>desde 2019</i></span>
-      <span class="stamp s3" role="listitem"><small>Sicilian · Enchanted</small>EE. UU.<i>2025</i></span>
+      <span class="stamp s3" role="listitem"><small>The Enchanted</small>EE. UU.<i>2026</i></span>
       <span class="stamp s5" role="listitem"><small>Serena Floral</small>Puerto Rico<i>2026</i></span>
       <span class="stamp s6" role="listitem"><small>Tablas Guay</small>España<i>2025</i></span>
       <span class="stamp s2" role="listitem"><small>House of José</small>Ecuador<i>2025</i></span>
@@ -836,11 +835,6 @@ const EMAIL = 'melgraphicdesign291@gmail.com';
 const TITLE = document.title;
 
 /* ---------- Imágenes (Pinterest y Behance de Mel) ---------- */
-const PIN = (h, s = 1200) => `https://i.pinimg.com/${s}x/${h}.jpg`;
-const BE = (f, s = '1400') => `https://mir-s3-cdn-cf.behance.net/project_modules/${s}/${f}`;
-const P = {
-  sic1:'37/4a/03/374a0309fd47935bc7fa1cf914a539b3', sic2:'7a/ba/53/7aba531b19dd2007229a4702a280d013'
-};
 
 /* ---------- Proyectos ---------- */
 const TAGS = { identidad:'Identidad', packaging:'Packaging', personaje:'Personajes', ilustracion:'Ilustración', papeleria:'Papelería', rediseno:'Rediseño' };
@@ -919,11 +913,6 @@ const PROJECTS = [
     desc:['El nombre nace de «lazy», con una triple z que simboliza descanso y pausa. Pero Lazzzy no es para gente floja: es para quienes tienen vidas ocupadas, valoran su tiempo y no quieren sacrificar calidad ni sabor.','Una identidad de comida empacada al vacío con etiquetas, ilustraciones de personajes en pausa, tote bag y una paleta naranja, verde y crema. Comer bien, nunca fue tan fácil.'],
     credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
     cover:LOC('lazzzy',1), hero:LOC('lazzzy',1), imgs:PAGES('lazzzy',2,13) },
-  { slug:'sicilian-bakery', name:'Sicilian Bakery', no:'25·12', year:2025, client:'Panadería · Virginia, EE. UU.', accent:'#6B4A3A',
-    services:['Rediseño','Packaging','Etiquetas'], tags:['rediseno','packaging'],
-    line:'Del horno venezolano a Virginia',
-    desc:['Rediseño de marca para la primera panadería venezolana en Virginia, Estados Unidos.','Cajas a rayas, etiquetas tipo ticket y el sello «handmade with love» para un producto que se hornea a mano.'],
-    cover:PIN(P.sic2,736), hero:PIN(P.sic1), imgs:[PIN(P.sic2)] },
   { slug:'tablas-guay', deck:true, name:'Tablas Guay', no:'25·10', year:2025, client:'Tablas de picoteo · España', accent:'#6C372F',
     services:['Identidad visual','Ilustración','Packaging','Papelería'], tags:['identidad','ilustracion','packaging','papeleria'],
     line:'Cada tabla, una historia',
@@ -945,7 +934,7 @@ const PROJECTS = [
 ];
 
 /* ---------- Cinta de marcas ---------- */
-const MARQUEE = ['The Enchanted Spa','Ribs BBQ','Serena Floral','Viko Cookies','F&P','Tablas Guay','Cheers Bakery','Revive Café','Hilitos y Puntaditas','Skin Co.','Woman Social Club','Lazzzy','10/10','Sicilian Bakery','Viela'];
+const MARQUEE = ['The Enchanted Spa','Ribs BBQ','Serena Floral','Viko Cookies','F&P','Tablas Guay','Cheers Bakery','Revive Café','Hilitos y Puntaditas','Skin Co.','Woman Social Club','Lazzzy','10/10','Viela'];
 $('#marquee').innerHTML = [...MARQUEE, ...MARQUEE].map(n => `<span>${n}</span>`).join('');
 
 /* ---------- Índice de proyectos + tarjetas ---------- */
@@ -1070,7 +1059,7 @@ $('#hola').innerHTML = [0, 1].map(k => HOLA.map(([w, l]) => `<span lang="${l}"${
 /* ---------- Marcas por año (lista con años, como Good Design Company) ---------- */
 const BRANDS = {
   2026: [['Cheers Bakery','galletas'],['Moki Cookies','galletas NY'],['Ribs BBQ','comida rápida'],['Jay Jay','galletas'],['Lazzzy','comida'],['Viela','moda'],['The Enchanted Spa','spa'],['Skin Co.','spa facial'],['Woman Social Club','club'],['Revive Café','café'],['Hilitos y Puntaditas','bordados'],['Oki Chicha','bebida'],['Serena Floral','floristería'],['Viko Cookies','galletas'],['F&P','constructora'],['Zuē Studios','contenido']],
-  2025: [['Sicilian Bakery','panadería'],['Tablas Guay','tablas · España'],['House of José','podcast'],['Smilo Cookies','galletas'],['10/10','hamburguesas'],['Moffes Bakery','repostería'],['Quality','regalos'],['YEI','eventos'],['Allegro Foods','rediseño'],['Amor Dulc','rediseño'],['Dulce Mordida','repostería'],['Life Home Bienes','inmobiliaria'],['Tony Ceviche','comida'],['Cero Treinta','servicios']],
+  2025: [['Tablas Guay','tablas · España'],['House of José','podcast'],['Smilo Cookies','galletas'],['10/10','hamburguesas'],['Moffes Bakery','repostería'],['Quality','regalos'],['YEI','eventos'],['Allegro Foods','rediseño'],['Amor Dulc','rediseño'],['Dulce Mordida','repostería'],['Life Home Bienes','inmobiliaria'],['Tony Ceviche','comida'],['Cero Treinta','servicios']],
   2024: [['Lililu Cake Shop','rebranding'],['La Manzanita Fit','fitness'],['Sam Eventos','festejos'],['Emira Activewear','redes'],['Palla Caracas','redes']],
   2023: [['Plain','ropa'],['Gis Innovation','tecnología'],['Bellagio Music','música'],['Symbolic','ropa urbana'],['Dynamova','ropa deportiva'],['Giovanna V.','arquitecta']],
   2022: [['Samu','app'],['Magic Town','delivery'],['271 Motors','taller'],['Il Giardino','trattoria'],['Dulce Naturaleza','floristería'],['C3','arquitectura'],['Bocanas','steak house'],['Juvi','accesorios'],['Mingo','trabajo de grado']]
@@ -1232,12 +1221,7 @@ $('#again').addEventListener('click', () => { thanks.hidden = true; form.hidden 
    ENCUADRES guarda el punto de enfoque publicado de cada foto (ruta → "x% y%").
    Para ajustarlas: abre la web con ?editar al final de la dirección, arrastra cada
    foto hasta que quede bien centrada y pulsa «Copiar ajustes». */
-const ENCUADRES = {
-  'https://i.pinimg.com/1200x/63/48/5a/63485a28d1a5906d9749bc3ee01bae5f.jpg': '81.6% 50%',
-  'https://i.pinimg.com/1200x/10/d0/3f/10d03fcf4dbb93851f2df080e58e93f8.jpg': '89.2% 50%',
-  'https://i.pinimg.com/1200x/cd/10/62/cd1062b567ec07f2a59f5109a511046e.jpg': '78.1% 50%',
-  'https://i.pinimg.com/1200x/c4/3d/27/c43d27263d095b251fd48e1a96641d0f.jpg': '45.8% 50%'
-};
+const ENCUADRES = {};
 const FRAME_KEY = 'mel-encuadres';
 const EDIT = new URLSearchParams(location.search).has('editar');
 let edits = {};
