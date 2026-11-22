@@ -131,7 +131,7 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 }
 
 /* ---------- Cinta de marcas ---------- */
-.marquee{background:var(--pink);border-block:1.5px solid var(--ink);overflow:hidden}
+.marquee{background:#F484B7;border-block:1.5px solid var(--ink);overflow:hidden}
 .marquee-track{display:flex;width:max-content;animation:mq 52s linear infinite}
 .marquee-track span{font:700 clamp(22px,2.4vw,34px)/1 var(--display);letter-spacing:-.018em;padding:16px 0;white-space:nowrap}
 .marquee-track span::after{content:"✦";margin:0 .7em;font-size:.75em;vertical-align:.1em}
@@ -283,10 +283,10 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 
 /* ---------- Sin fronteras (sellos de pasaporte / hanko) ---------- */
 .world{position:relative;padding:0 0 clamp(60px,8vw,120px);border-top:1.5px solid var(--ink);overflow:hidden}
-.hola{overflow:hidden;border-bottom:1.5px solid var(--ink);background:var(--pink-3)}
+.hola{overflow:hidden;border-bottom:1.5px solid var(--ink);background:#F484B7}
 .hola-track{display:flex;width:max-content;animation:mq 70s linear infinite reverse}
 .hola-track span{padding:18px 0;font:700 clamp(28px,3.4vw,54px)/1 var(--display);letter-spacing:-.024em;white-space:nowrap}
-.hola-track span::after{content:"·";margin:0 .5em;color:var(--magenta)}
+.hola-track span::after{content:"·";margin:0 .5em;color:var(--ink)}
 .hola:hover .hola-track{animation-play-state:paused}
 .world-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(30px,4vw,72px);align-items:center;padding:clamp(52px,7vw,112px) var(--gutter) clamp(34px,4vw,64px)}
 .world-lede{margin:24px 0 0;max-width:44ch;font:600 clamp(18px,1.55vw,22px)/1.42 var(--sans);letter-spacing:-.012em}
@@ -417,6 +417,16 @@ fieldset.f{border:0;margin:0;padding:0}
 /* ---------- Aviso ---------- */
 .toast{position:fixed;left:50%;bottom:24px;z-index:90;translate:-50% 20px;opacity:0;background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;transition:opacity .25s,translate .25s;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
 .toast.on{opacity:1;translate:-50% 0}
+
+/* ---------- Modo edición de encuadres (se abre con ?editar en la dirección) ---------- */
+.editing :is(.slide,.card-img,.case-hero,.mosaic figure,.char,.portrait,.ebook-img) img{cursor:move;touch-action:none;-webkit-user-drag:none}
+.editing .framing{outline:3px dashed #F484B7;outline-offset:-3px}
+.editing .toast{bottom:104px;z-index:210}
+.edit-bar{position:fixed;left:50%;bottom:16px;translate:-50% 0;z-index:200;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;width:max-content;max-width:calc(100vw - 24px);padding:10px 12px 10px 18px;border-radius:22px;background:var(--ink);color:#fff;font-size:13.5px;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.edit-bar b{color:#F484B7}
+.edit-bar span{opacity:.85}
+.edit-bar button,.edit-bar a{border:1.5px solid #fff;border-radius:999px;padding:7px 14px;background:transparent;color:#fff;font:600 13px/1 var(--sans);text-decoration:none;cursor:pointer}
+.edit-bar button[data-a=copy]{background:#F484B7;border-color:#F484B7;color:var(--ink)}
 
 /* ---------- Aparición al hacer scroll ---------- */
 .js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
@@ -1020,7 +1030,7 @@ reel.addEventListener('keydown', e => { if (e.key === 'ArrowRight') goSlide(cur 
 let sx = null, sy = 0;
 reel.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
 reel.addEventListener('touchend', e => {
-  if (sx === null) return;
+  if (sx === null || document.documentElement.classList.contains('editing')) { sx = null; return; }
   const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
   if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) goSlide(cur + (dx < 0 ? 1 : -1));
 }, { passive: true });
@@ -1199,6 +1209,78 @@ function done() {
   form.hidden = true; thanks.hidden = false; thanks.focus();
 }
 $('#again').addEventListener('click', () => { thanks.hidden = true; form.hidden = false; form.elements['entry.1740131693'].focus(); });
+
+/* ---------- Encuadre de las fotos ----------
+   ENCUADRES guarda el punto de enfoque publicado de cada foto (ruta → "x% y%").
+   Para ajustarlas: abre la web con ?editar al final de la dirección, arrastra cada
+   foto hasta que quede bien centrada y pulsa «Copiar ajustes». */
+const ENCUADRES = {};
+const FRAME_KEY = 'mel-encuadres';
+const EDIT = new URLSearchParams(location.search).has('editar');
+let edits = {};
+if (EDIT) { try { edits = JSON.parse(localStorage.getItem(FRAME_KEY) || '{}') || {}; } catch (e) {} }
+const frameImg = img => { const p = edits[img.getAttribute('src')] || ENCUADRES[img.getAttribute('src')]; img.style.objectPosition = p || ''; };
+const frameAll = (root = document) => root.querySelectorAll('img').forEach(frameImg);
+frameAll();
+new MutationObserver(ms => ms.forEach(m => {
+  if (m.type === 'attributes') { frameImg(m.target); return; }
+  m.addedNodes.forEach(n => { if (n.nodeType !== 1) return; if (n.tagName === 'IMG') frameImg(n); else frameAll(n); });
+})).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+
+if (EDIT) {
+  document.documentElement.classList.add('editing');
+  const bar = document.createElement('div');
+  bar.className = 'edit-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Modo edición de fotos');
+  bar.innerHTML = `<b>Modo edición</b><span>Arrastra una foto para centrarla · doble clic la devuelve al centro · para abrir un proyecto pulsa su nombre</span><button type="button" data-a="copy">Copiar ajustes</button><button type="button" data-a="reset">Borrar todo</button><a href="${location.pathname}${location.hash}">Salir</a>`;
+  document.body.append(bar);
+  const save = () => { try { localStorage.setItem(FRAME_KEY, JSON.stringify(edits)); } catch (e) {} };
+  const SEL = '.slide,.card-img,.case-hero,.mosaic figure,.char,.portrait,.ebook-img';
+  const pick = t => { if (t.closest('a:not(.card):not(.row), button, figcaption, .edit-bar')) return null; const box = t.closest(SEL); return box ? box.querySelector('img') : null; };
+  let drag = null, moved = false;
+  document.addEventListener('pointerdown', e => {
+    if (e.button) return;
+    const img = pick(e.target); if (!img || !img.naturalWidth) return;
+    e.preventDefault();
+    const r = img.getBoundingClientRect(), s = Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight);
+    const [px, py] = (getComputedStyle(img).objectPosition || '50% 50%').split(' ').map(parseFloat);
+    drag = { img, x: e.clientX, y: e.clientY, px, py, ox: img.naturalWidth * s - r.width, oy: img.naturalHeight * s - r.height, v: '' };
+    moved = false; img.classList.add('framing');
+  });
+  window.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
+    const lim = v => Math.round(Math.min(100, Math.max(0, v)) * 10) / 10;
+    const x = drag.ox > 1 ? lim(drag.px - dx / drag.ox * 100) : drag.px;
+    const y = drag.oy > 1 ? lim(drag.py - dy / drag.oy * 100) : drag.py;
+    drag.v = `${x}% ${y}%`; drag.img.style.objectPosition = drag.v;
+  });
+  const end = () => {
+    if (!drag) return;
+    drag.img.classList.remove('framing');
+    if (moved && drag.v) { edits[drag.img.getAttribute('src')] = drag.v; save(); frameAll(); toast('Encuadre guardado ✓'); }
+    drag = null;
+  };
+  window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  /* En modo edición las fotos no funcionan como enlace (para abrir un proyecto, pulsa su nombre) */
+  document.addEventListener('click', e => { if (moved || pick(e.target)) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  document.addEventListener('dblclick', e => {
+    const img = pick(e.target); if (!img) return;
+    e.preventDefault(); edits[img.getAttribute('src')] = '50% 50%'; save(); frameAll(); toast('Foto centrada de nuevo');
+  });
+  bar.addEventListener('click', async e => {
+    const a = e.target.closest('button'); if (!a) return;
+    if (a.dataset.a === 'reset') {
+      if (!confirm('¿Borrar todos los encuadres que hiciste en este navegador?')) return;
+      edits = {}; save(); frameAll(); toast('Encuadres borrados'); return;
+    }
+    const n = Object.keys(edits).length;
+    if (!n) { toast('Todavía no has movido ninguna foto'); return; }
+    const txt = 'Encuadres para la web de Mel:\n' + JSON.stringify(edits, null, 1);
+    try { await navigator.clipboard.writeText(txt); toast(`${n} ${n === 1 ? 'ajuste copiado' : 'ajustes copiados'}: pégalos en el chat con Claude`); }
+    catch (err) { prompt('Copia este texto y pégalo en el chat con Claude:', txt); }
+  });
+}
 })();
 </script>
 </body>
