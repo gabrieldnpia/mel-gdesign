@@ -839,10 +839,7 @@ const TITLE = document.title;
 const PIN = (h, s = 1200) => `https://i.pinimg.com/${s}x/${h}.jpg`;
 const BE = (f, s = '1400') => `https://mir-s3-cdn-cf.behance.net/project_modules/${s}/${f}`;
 const P = {
-  sic1:'37/4a/03/374a0309fd47935bc7fa1cf914a539b3', sic2:'7a/ba/53/7aba531b19dd2007229a4702a280d013',
-  hil1:'d2/40/67/d2406767675c634a83ceaccbbf045f1c', hil2:'c9/36/0b/c9360b9d7d149b571c97dd483782128d',
-  hil3:'de/5a/b0/de5ab068d94b7e3d6d65939426224ff3', hil4:'d3/77/53/d37753cfbbf7e301157dd0f232798d96',
-  hil5:'5f/c6/7e/5fc67eb53d466c9573d441a47f430658'
+  sic1:'37/4a/03/374a0309fd47935bc7fa1cf914a539b3', sic2:'7a/ba/53/7aba531b19dd2007229a4702a280d013'
 };
 
 /* ---------- Proyectos ---------- */
@@ -880,11 +877,12 @@ const PROJECTS = [
     desc:['Revive Café nace para ser un espacio moderno y acogedor donde las ideas despiertan, las citas fluyen sin prisa y el trabajo se siente más ligero: en Revive se sirve mucho más que cafeína, se sirve vitalidad.','Un logotipo de letras anchas con «café» en manuscrita, una familia de utensilios de café dibujados como íconos y una paleta vino, mantequilla y celeste que vive en vasos, cajas, bolsas, menú y tarjeta de fidelidad.'],
     credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
     cover:LOC('revive-cafe',21), hero:LOC('revive-cafe',21), imgs:PAGES('revive-cafe',22,40) },
-  { slug:'hilitos-y-puntaditas', name:'Hilitos y Puntaditas', no:'26·06', year:2026, client:'Bordados hechos a mano', accent:'#FF8FBF',
+  { slug:'hilitos-y-puntaditas', deck:true, name:'Hilitos y Puntaditas', no:'26·06', year:2026, client:'Bordados hechos a mano', accent:'#FF8FBF',
     services:['Identidad visual','Personaje','Packaging','Papelería'], tags:['identidad','personaje','packaging','papeleria'],
     line:'Cada puntadita, hecha con amor',
-    desc:['Universo de marca para un emprendimiento de bordados: logotipo, personaje, empaques, etiquetas y detalles de papelería.','Un personaje rosado con antenas se convirtió en la cara de la marca y aparece en cada pieza, de la caja al termo.'],
-    cover:PIN(P.hil3,736), hero:PIN(P.hil3), imgs:[PIN(P.hil1),PIN(P.hil2),PIN(P.hil5),PIN(P.hil4)] },
+    desc:['Hilitos y Puntaditas no es solo un taller de bordado: es el lugar donde el hilo se convierte en un mensaje. Nace del cuidado de lo hecho a mano, pero con la estructura para vestir a toda una empresa, ya sea con un regalo inolvidable o con el uniforme de un equipo.','La cara de la marca es Hili, un corazón alfiletero con antenas de alfiler que aparece bordado en gorras, en el empaque, la caja, las etiquetas, el termo y hasta en la guía de tallas.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('hilitos-y-puntaditas',1), hero:LOC('hilitos-y-puntaditas',1), imgs:PAGES('hilitos-y-puntaditas',2,20) },
   { slug:'woman-social-club', deck:true, name:'Woman Social Club', no:'26·05', year:2026, client:'Club social de mujeres', accent:'#7A1F2B',
     services:['Identidad visual','Ilustración','Caja PR','Papelería'], tags:['identidad','ilustracion','packaging','papeleria'],
     line:'La riqueza del tiempo compartido',
@@ -909,12 +907,12 @@ const PROJECTS = [
     desc:['Un spa móvil infantil que convierte cumpleaños y eventos en experiencias inolvidables, llevando magia, cuidado y belleza directamente a casa.','Creé un hada con turbante y corona como personaje de la marca, y la llevé a frascos, batas, toallas, bolsas, tarjetas, un libro para colorear y hasta la rotulación de la van. Rosas, amarillo mantequilla y celeste para un mundo donde cada niña se siente celebrada.'],
     credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
     cover:LOC('the-enchanted-spa',1), hero:LOC('the-enchanted-spa',1), imgs:PAGES('the-enchanted-spa',2,20) },
-  { slug:'viela', name:'Viela', no:'26·02', year:2026, client:'Moda de playa', accent:'#3FA9A0',
-    services:['Identidad visual','Logotipo','Ilustración'], tags:['identidad','ilustracion'],
-    line:'Curvas suaves, sal y mar',
-    desc:['Identidad visual con un logotipo de trazo fluido y una paleta inspirada en la playa.','Logotipo, paleta, patrones y aplicaciones para campaña y redes.'],
-    cover:BE('9aac7d244864563.69a08e653dc13.jpg'), hero:BE('79b82f244864563.69a08e65428ce.jpg'),
-    imgs:['9aac7d244864563.69a08e653dc13.jpg','f29917244864563.69a08e653f98b.jpg','67aa3a244864563.69a08e654139e.jpg','70f17a244864563.69a08e6541b4f.jpg','68ed95244864563.69a08e6540719.jpg'].map(f=>BE(f)) },
+  { slug:'viela', deck:true, name:'Viela', no:'26·02', year:2026, client:'Trajes de baño · Venezuela', accent:'#3FA9A0',
+    services:['Identidad visual','Ilustración','Packaging','Etiquetas'], tags:['identidad','ilustracion','packaging'],
+    line:'Del mar, con amor',
+    desc:['Viela es una marca de trajes de baño que celebra la feminidad en su estado más relajado: se aleja de la perfección rígida para abrazar una estética orgánica, inspirada en los días bajo el sol y la textura de la costa, en todas las tallas.','El concepto, «Un caleidoscopio del Caribe», lleva un fragmento del paraíso venezolano sobre la piel: un pareo ilustrado como obra textil, etiquetas, cajas, tote bags y una paleta turquesa, coral y arena.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('viela',1), hero:LOC('viela',1), imgs:PAGES('viela',2,18) },
   { slug:'lazzzy', deck:true, name:'Lazzzy', no:'26·01', year:2026, client:'Comida empacada al vacío · Venezuela', accent:'#F08A24',
     services:['Identidad visual','Ilustración','Packaging','Etiquetas'], tags:['identidad','ilustracion','packaging'],
     line:'Menos cocina, más vida',
@@ -938,12 +936,12 @@ const PROJECTS = [
     desc:['Para 10/10 creé una estrategia de personalidad gráfica y verbal: una marca genuinamente fresca que adopta el dialecto popular y una temática de colegio, sin dejar de lado que es comida rápida.','La idea parte del 10/10 como la nota máxima: un logotipo limpio y minimalista que deja espacio a ilustraciones, stickers y frases como «La mayor nota» o «Tú y yo somos un 10/10».'],
     credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
     cover:LOC('diez-de-diez',1), hero:LOC('diez-de-diez',1), imgs:PAGES('diez-de-diez',2,12) },
-  { slug:'la-manzanita-fit', name:'La Manzanita Fit', no:'24·11', year:2024, client:'Fitness', accent:'#D9322E',
-    services:['Identidad visual','Packaging'], tags:['identidad','packaging'],
-    line:'Energía con mordida',
-    desc:['Identidad y empaque para una marca fitness: logotipo con manzana, caja de envío y piezas de motivación.','Uno de los proyectos que más he disfrutado: empezó con un moodboard lleno de energía.'],
-    cover:BE('022766212918449.673d7443a73e4.png'), hero:BE('78f214212918449.673d7443a9a6f.jpg'),
-    imgs:['33f5bd212918449.673d7443a78a2.jpg','4cb721212918449.673d7443a95b1.jpg','964219212918449.673d7443a8222.jpg','aead15212918449.673d7443a90dc.jpg'].map(f=>BE(f)) }
+  { slug:'la-manzanita-fit', deck:true, name:'La Manzanita Fit', no:'24·11', year:2024, client:'Fitness', accent:'#D9322E',
+    services:['Imagotipo','Identidad visual','Avatar para redes'], tags:['identidad','rediseno'],
+    line:'Manzana, pesa y M en un solo símbolo',
+    desc:['El imagotipo de La Manzanita Fit fusiona una manzana, una pesa en forma de disco y la letra M en una sola forma fluida, con líneas rígidas y definidas como las de una persona en plena forma física.','Las curvas continuas representan la fluidez del progreso, y la paleta negro, grafito y rojo lleva la marca a shakers, tote bags y a un nuevo avatar para Instagram, con su antes y después.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('la-manzanita-fit',1), hero:LOC('la-manzanita-fit',1), imgs:PAGES('la-manzanita-fit',2,8) }
 ];
 
 /* ---------- Cinta de marcas ---------- */
@@ -1016,7 +1014,7 @@ const SLIDES = [
   ['lazzzy', LOC('lazzzy', 3), 'Lazzzy', 'Logotipo y empaque'],
   ['serena-floral', LOC('serena-floral', 15), 'Serena Floral', 'Ramo y empaque'],
   ['fyp-constructora', LOC('fyp-constructora', 15), 'F&P Constructora', 'Rotulación'],
-  ['hilitos-y-puntaditas', PIN(P.hil2), 'Hilitos y Puntaditas', 'Producto y personaje']
+  ['hilitos-y-puntaditas', LOC('hilitos-y-puntaditas', 6), 'Hilitos y Puntaditas', 'Personaje bordado']
 ];
 const reel = $('#seleccion');
 $('#slides').innerHTML = SLIDES.map(([slug, src, name, what], i) => `<figure class="slide${i ? '' : ' on'}" style="--bg:url('${src}')">${imgTag(src, `${name}: ${what}`)}<figcaption><div><b>${name}</b><small>${what}</small></div><a href="#proyecto/${slug}">Ver proyecto →</a></figcaption></figure>`).join('');
@@ -1049,19 +1047,19 @@ goSlide(0);
 /* Mascotas de la carpeta «Mascotas» (Mesa de trabajo 1 a 14): [número, texto bajo la tarjeta, descripción, giro] */
 const CHARS = [
   [1, 'Moyi · Viko Cookies', 'Moyi, la galleta rosada con botas de Viko Cookies', -3],
-  [2, 'Galleta pastelera', 'Galleta de chocolate con gorro de chef y delantal rosado', 2],
-  [3, 'Gatito con su bebida', 'Gatito azul tomando su bebida con pajilla', -1.5],
+  [2, 'Moki', 'Galleta de chocolate con gorro de chef y delantal rosado, mascota de Moki', 2],
+  [3, 'Oki Chicha', 'Gatito azul tomando su bebida con pajilla, mascota de Oki Chicha', -1.5],
   [4, 'Jay Jay Bakery', 'Galleta sonriente de Jay Jay Bakery con las manos en las mejillas', 2.5],
-  [5, 'Hilitos y Puntaditas', 'Corazón rosado con antenas, personaje de Hilitos y Puntaditas', -2],
-  [6, 'Taza con ojitos', 'Taza de café con ojitos y un chorro de café', 1.5],
-  [7, 'Cajita', 'Cajita roja con ojitos', -2.5],
+  [5, 'Hili · Hilitos y Puntaditas', 'Hili, el corazón alfiletero con antenas de Hilitos y Puntaditas', -2],
+  [6, 'KOOL', 'Taza de café con ojitos y un chorro de café, mascota de KOOL', 1.5],
+  [7, 'Legacy Vault TCG', 'Cajita roja con ojitos, mascota de Legacy Vault TCG', -2.5],
   [8, 'Ribs BBQ', 'Cerdito con gorra, mascota de Ribs BBQ', 2],
-  [9, 'Chico con audífonos', 'Chico dibujado en línea, con audífonos, caminando', -3],
-  [10, 'Osita galleta', 'Osita rosada con capucha de galleta', 2],
+  [9, 'Yuzzi', 'Chico dibujado en línea, con audífonos, caminando, mascota de Yuzzi', -3],
+  [10, 'Sugar Sweet', 'Osita rosada con capucha de galleta, mascota de Sugar Sweet', 2],
   [11, 'The Enchanted Spa', 'Hada con turbante y corona de The Enchanted Spa', -1.5],
-  [12, 'Galletita rosa', 'Galletita rosa caminando', 2.5],
-  [13, 'Niña de suéter', 'Niña de colita con suéter celeste', -2],
-  [14, 'Cubito saludando', 'Cubito dibujado en línea saludando', 1.5]
+  [12, 'Viko Cookies', 'Galletita rosa caminando, de Viko Cookies', 2.5],
+  [13, 'Chichus Librería', 'Niña de colita con suéter celeste, mascota de Chichus Librería', -2],
+  [14, 'Allegro', 'Cubito dibujado en línea saludando, mascota de Allegro', 1.5]
 ];
 $('#strip').innerHTML = CHARS.map(([n, cap, alt, r]) => `<figure class="char" style="--r:${r}deg">${imgTag(`img/mascotas/mascota-${String(n).padStart(2, '0')}.jpg`, alt)}<figcaption>${cap}</figcaption></figure>`).join('');
 
