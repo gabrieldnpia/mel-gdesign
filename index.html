@@ -1097,7 +1097,7 @@ function openCase(slug) {
         <a class="btn case-cta" href="#contacto" data-to-contact>¿Quieres una marca así? Trabajemos junt@s →</a>
       </div>
     </header>
-    <div class="mosaic${p.deck ? ' deck' : ''}">${p.imgs.map((src, j) => `<figure class="w${sp[j]}">${imgTag(src, `${p.name}, imagen ${j + 1}`)}</figure>`).join('')}</div>
+    <div class="mosaic${p.deck ? ' deck' : ''}">${p.imgs.map((src, j) => `<figure class="w${sp[j]}">${imgTag(src, `${p.name}, imagen ${j + 1}`).replace('<img', '<img onerror="this.parentNode.remove()"')}</figure>`).join('')}</div>
     <a class="case-next" href="#proyecto/${next.slug}"><span>Siguiente proyecto</span><b>${next.name} →</b></a>`;
   caseEl.scrollTop = 0;
   $('.x', caseEl).focus({ preventScroll: true });
