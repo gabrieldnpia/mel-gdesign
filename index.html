@@ -173,14 +173,14 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 @media (max-width:1000px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.cards{grid-template-columns:1fr}}
 .card{display:block;text-decoration:none}
-.card-img{aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;background:var(--pink-3)}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.card-img{aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:var(--pink-3)}
+.card-img img{width:100%;height:100%;object-fit:contain;transition:transform .9s var(--ease)}
 .card:hover .card-img img{transform:scale(1.045)}
 .card-meta{display:flex;justify-content:space-between;margin-top:12px;font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .card h3{margin:4px 0 2px;font:700 24px/1.05 var(--display);letter-spacing:-.024em}
 .card p{margin:0;font-size:14.5px;color:var(--ink-2)}
 .card .more{display:inline-block;margin-top:8px;font-size:14px;border-bottom:1.5px solid}
-.peek{position:fixed;left:0;top:0;width:min(280px,21vw);aspect-ratio:4/5;object-fit:cover;border-radius:16px;pointer-events:none;z-index:40;opacity:0;scale:.86;transition:opacity .25s,scale .3s var(--ease);box-shadow:0 18px 40px rgba(34,26,30,.22)}
+.peek{position:fixed;left:0;top:0;width:min(340px,24vw);height:auto;object-fit:contain;border-radius:12px;pointer-events:none;z-index:40;opacity:0;scale:.86;transition:opacity .25s,scale .3s var(--ease);box-shadow:0 18px 40px rgba(34,26,30,.22)}
 .peek.on{opacity:1;scale:1}
 @media (hover:none),(max-width:900px){.peek{display:none}}
 
@@ -197,7 +197,9 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 .reel-bar i{transition:transform .5s var(--ease)}
 .slide{position:absolute;inset:0;margin:0;overflow:hidden;opacity:0;transform:scale(1.06);transition:opacity .8s ease,transform 1.6s var(--ease);pointer-events:none}
 .slide.on{opacity:1;transform:scale(1);pointer-events:auto}
-.slide img{width:100%;height:100%;object-fit:cover}
+.slide img{position:relative;width:100%;height:100%;object-fit:contain}
+/* fondo difuminado con la misma imagen, para que la diapositiva se vea completa sin franjas vacías */
+.slide::before{content:"";position:absolute;inset:-60px;background:var(--bg) center/cover;filter:blur(40px) brightness(.55) saturate(1.2)}
 .slide::after{content:"";position:absolute;inset:auto 0 0;height:50%;background:linear-gradient(transparent,rgba(20,10,15,.6));pointer-events:none}
 .slide figcaption{position:absolute;left:var(--gutter);right:var(--gutter);bottom:clamp(28px,4vw,52px);z-index:2;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
 .slide figcaption b{display:block;font:700 clamp(38px,6vw,104px)/.88 var(--display);letter-spacing:-.033em}
@@ -387,8 +389,8 @@ fieldset.f{border:0;margin:0;padding:0}
 .case-no{font-size:12.5px;letter-spacing:.12em;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .case-bar .x{width:40px;height:40px;display:grid;place-items:center;padding:0;border:1.5px solid var(--ink);border-radius:50%;background:none;cursor:pointer;font-size:16px}
 .case-bar .x:hover{background:var(--ink);color:var(--paper)}
-.case-hero{margin:0;overflow:hidden;height:min(80svh,58vw);background:var(--accent,var(--pink-2))}
-.case-hero img{width:100%;height:100%;object-fit:cover}
+.case-hero{margin:0;overflow:hidden;background:var(--accent,var(--pink-2))}
+.case-hero img{display:block;width:100%;height:auto;max-height:calc(100svh - var(--nav-h));object-fit:contain}
 .case-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(22px,4vw,70px);padding:clamp(30px,5vw,76px) var(--gutter)}
 .case-title{margin:0;font:700 clamp(50px,8vw,146px)/.84 var(--display);letter-spacing:-.039em}
 .case-line{margin:16px 0 0;font:700 clamp(28px,2.8vw,44px)/1 var(--hand);color:var(--magenta)}
@@ -399,20 +401,22 @@ fieldset.f{border:0;margin:0;padding:0}
 .case-desc p{margin:0 0 12px;font-size:16.5px;line-height:1.62}
 .case-cta{margin-top:10px;background:var(--ink);color:var(--paper)}
 .case-cta:hover{background:var(--magenta);color:#fff}
-.mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(8px,1.2vw,16px);padding:0 var(--gutter)}
+.mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(8px,1.2vw,16px);padding:0 var(--gutter);align-items:start}
 .mosaic figure{margin:0;border-radius:14px;overflow:hidden;background:var(--pink-3)}
-.mosaic img{width:100%;height:100%;object-fit:cover}
-.w6{grid-column:span 6;aspect-ratio:16/9}
-.w3{grid-column:span 3;aspect-ratio:4/5}
-.w2{grid-column:span 2;aspect-ratio:3/4}
-.w4{grid-column:span 4;aspect-ratio:3/2}
-.mosaic.deck figure{aspect-ratio:1900/1080}
+.mosaic img{display:block;width:100%;height:auto}
+.w6{grid-column:span 6}
+.w3{grid-column:span 3}
+.w2{grid-column:span 2}
+.w4{grid-column:span 4}
+.wc{grid-column:2/span 4}
+.mosaic.deck figure{display:grid;place-items:center;background:transparent}
+.mosaic.deck img{width:auto;max-width:100%;max-height:calc(100svh - var(--nav-h) - 40px);border-radius:14px}
 .case-next{display:block;margin:clamp(44px,6vw,96px) var(--gutter) 0;padding:28px 0 clamp(44px,6vw,90px);border-top:1.5px solid var(--ink);text-decoration:none}
 .case-next span{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
 .case-next b{display:block;margin-top:8px;font:700 clamp(46px,7vw,124px)/.88 var(--display);letter-spacing:-.039em;transition:color .2s}
 .case-next:hover b{color:var(--magenta)}
 @media (max-width:820px){.case-intro{grid-template-columns:1fr}.case-meta{grid-template-columns:1fr 1fr}}
-@media (max-width:700px){.mosaic{grid-template-columns:1fr 1fr}.w6,.w4{grid-column:1/-1;aspect-ratio:4/3}.w3,.w2{grid-column:span 1;aspect-ratio:4/5}.mosaic.deck figure{grid-column:1/-1;aspect-ratio:1900/1080}}
+@media (max-width:700px){.mosaic{grid-template-columns:1fr 1fr}.w6,.w4,.wc{grid-column:1/-1}.w3,.w2{grid-column:span 1}.mosaic.deck figure{grid-column:1/-1}}
 
 /* ---------- Aviso ---------- */
 .toast{position:fixed;left:50%;bottom:24px;z-index:90;translate:-50% 20px;opacity:0;background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;transition:opacity .25s,translate .25s;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
@@ -857,74 +861,79 @@ const P = {
 /* ---------- Proyectos ---------- */
 const TAGS = { identidad:'Identidad', packaging:'Packaging', personaje:'Personajes', ilustracion:'Ilustración', papeleria:'Papelería', rediseno:'Rediseño' };
 const LOC = (slug, n) => `img/proyectos/${slug}/${String(n).padStart(2, '0')}.jpg`;
+const PAGES = (slug, a, b) => Array.from({ length: b - a + 1 }, (_, i) => LOC(slug, a + i));
 const PROJECTS = [
   { slug:'viko-cookies', deck:true, name:'Viko Cookies', no:'26·10', year:2026, client:'Galletas de autor · Venezuela', accent:'#CC0639',
     services:['Identidad visual','Personaje','Packaging','Tarjeta de fidelidad'], tags:['identidad','personaje','packaging','papeleria'],
     line:'Ella es Moyi',
     desc:['Viko Cookies le da un giro moderno al postre casero: galletas de autor y rolls de canela de sabores sorprendentes. El nombre nace de Victoria, su fundadora, y la marca entera se siente como el proyecto de una persona, no de una fábrica.','La protagonista es Moyi, una galleta rosada con chispas magenta, ojos grandes, mejillas con pecas y botas gruesas. Ella vive en la caja, en las bolsas y en la tarjeta de fidelidad.'],
     credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
-    cover:LOC('viko-cookies',4), hero:LOC('viko-cookies',1), imgs:[3,5,8,9,10,11,12].map(n=>LOC('viko-cookies',n)) },
+    cover:LOC('viko-cookies',1), hero:LOC('viko-cookies',1), imgs:PAGES('viko-cookies',2,12) },
   { slug:'fyp-constructora', deck:true, name:'F&P Constructora', no:'26·08', year:2026, client:'Metalmecánica y obras civiles · Venezuela', accent:'#F94101',
     services:['Identidad visual','Sistema gráfico','Uniformes','Rotulación'], tags:['identidad','papeleria'],
     line:'Del corte láser a la infraestructura pesada',
     desc:['FYP Constructora es una empresa integral de metalmecánica, ingeniería y obras civiles con sede en El Junquito, Caracas: del detalle arquitectónico de alta precisión al movimiento de tierra y la infraestructura pesada.','Un símbolo construido como una estructura metálica, naranja de seguridad sobre grafito y un patrón que se lleva a uniformes, cascos, camiones, carnets y tarjetas.'],
     credits:'Diseño gráfico y dirección creativa: Melanie Baptista',
-    cover:LOC('fyp-constructora',11), hero:LOC('fyp-constructora',1), imgs:[3,4,6,7,9,12,13,15,16].map(n=>LOC('fyp-constructora',n)) },
+    cover:LOC('fyp-constructora',1), hero:LOC('fyp-constructora',1), imgs:PAGES('fyp-constructora',2,18) },
   { slug:'ribs-bbq', deck:true, name:'Ribs BBQ', no:'26·08', year:2026, client:'Costillas y papas fritas · Venezuela', accent:'#D22622',
     services:['Identidad visual','Personaje','Packaging','Ilustración'], tags:['identidad','personaje','packaging','ilustracion'],
     line:'Just ribs & fries',
     desc:['Ribs se inspira en las marcas clásicas estadounidenses y las eleva con un diseño impecable: costillas ahumadas que se deshacen en la boca, papas fritas y servicio rápido.','Un cerdito cocinero como personaje, rojo, azul marino y crema, y un sistema de empaques para papas, cajas, bolsas y menú. Hasta el cierre tiene su frase: «Huesos limpios. Nos vemos pronto».'],
     credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
-    cover:LOC('ribs-bbq',9), hero:LOC('ribs-bbq',3), imgs:[4,6,7,11,13,16,18,21,20].map(n=>LOC('ribs-bbq',n)) },
+    cover:LOC('ribs-bbq',1), hero:LOC('ribs-bbq',1), imgs:PAGES('ribs-bbq',2,21) },
   { slug:'serena-floral', deck:true, name:'Serena Floral', no:'26·06', year:2026, client:'Floristería · Puerto Rico', accent:'#8C2940',
     services:['Identidad visual','Tipografía intervenida','Packaging','Papelería'], tags:['identidad','packaging','papeleria','ilustracion'],
     line:'Flores que respiran libres',
     desc:['«La naturaleza no tiene reglas rígidas, y nuestras flores tampoco.» Serena Floral no hace arreglos tradicionales: cura pedacitos de naturaleza en ramos estilo pop-up, con colecciones efímeras y exclusivas.','Un logotipo con la S y la F intervenidas a mano, papel acuarelado, cintas, cajas, bolsas y tarjetas en vino, rosa y verde oliva. Let\'s make today bloom.'],
     credits:'Dirección creativa e ilustración: Melanie Baptista',
-    cover:LOC('serena-floral',15), hero:LOC('serena-floral',10), imgs:[3,4,8,11,12,19,22,13].map(n=>LOC('serena-floral',n)) },
-  { slug:'revive-cafe', name:'Revive Café', no:'26·06', year:2026, client:'Cafetería', accent:'#F3D34A',
-    services:['Logotipo','Ilustración','Packaging'], tags:['identidad','ilustracion','packaging'],
-    line:'Para despertar con estilo',
-    desc:['Logotipo, sistema de ilustraciones y aplicaciones para una marca de café: vasos, bolsa de delivery y papelería.','Una paleta mantequilla y vino tinto que se reconoce desde lejos, con utensilios de café dibujados a mano.'],
-    cover:PIN(P.rev1,736), hero:PIN(P.rev2), imgs:[PIN(P.rev1),PIN(P.rev4),PIN(P.rev5),PIN(P.rev3)] },
+    cover:LOC('serena-floral',1), hero:LOC('serena-floral',1), imgs:PAGES('serena-floral',2,22) },
+  { slug:'revive-cafe', deck:true, name:'Revive Café', no:'26·06', year:2026, client:'Cafetería', accent:'#F3D34A',
+    services:['Identidad visual','Ilustración','Packaging','Papelería'], tags:['identidad','ilustracion','packaging','papeleria'],
+    line:'Good coffee, good energy',
+    desc:['Revive Café nace para ser un espacio moderno y acogedor donde las ideas despiertan, las citas fluyen sin prisa y el trabajo se siente más ligero: en Revive se sirve mucho más que cafeína, se sirve vitalidad.','Un logotipo de letras anchas con «café» en manuscrita, una familia de utensilios de café dibujados como íconos y una paleta vino, mantequilla y celeste que vive en vasos, cajas, bolsas, menú y tarjeta de fidelidad.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('revive-cafe',21), hero:LOC('revive-cafe',21), imgs:PAGES('revive-cafe',22,40) },
   { slug:'hilitos-y-puntaditas', name:'Hilitos y Puntaditas', no:'26·06', year:2026, client:'Bordados hechos a mano', accent:'#FF8FBF',
     services:['Identidad visual','Personaje','Packaging','Papelería'], tags:['identidad','personaje','packaging','papeleria'],
     line:'Cada puntadita, hecha con amor',
     desc:['Universo de marca para un emprendimiento de bordados: logotipo, personaje, empaques, etiquetas y detalles de papelería.','Un personaje rosado con antenas se convirtió en la cara de la marca y aparece en cada pieza, de la caja al termo.'],
     cover:PIN(P.hil3,736), hero:PIN(P.hil3), imgs:[PIN(P.hil1),PIN(P.hil2),PIN(P.hil5),PIN(P.hil4)] },
-  { slug:'woman-social-club', name:'Woman Social Club', no:'26·05', year:2026, client:'Club social de mujeres', accent:'#7A1F2B',
-    services:['Branding','Caja PR','Dieline','Papelería'], tags:['identidad','packaging','papeleria'],
-    line:'Un club que se abre como un regalo',
-    desc:['Caja PR con su estructura de troquel (dieline), tote bag, tarjetas, stickers y flyers para un club social de mujeres.','Cada pieza está pensada para el momento de abrir la caja: notas escritas, detalles ilustrados y una paleta vino y rosa.'],
-    cover:PIN(P.wsc4,736), hero:PIN(P.wsc1), imgs:[PIN(P.wsc4),PIN(P.wsc3),PIN(P.wsc2)] },
-  { slug:'skin-co', name:'Skin Co.', no:'26·04', year:2026, client:'Face gym y facial bar', accent:'#8FA67E',
-    services:['Papelería','Giftcards','Menú','Fidelización'], tags:['papeleria'],
-    line:'Papelería que se siente como un facial',
-    desc:['Tarjetas de presentación, giftcards, menú de servicios y tarjeta de fidelidad para un spa facial.','Verde salvia, rosa empolvado y hojas ilustradas: una papelería tan cuidada como la experiencia.'],
-    cover:PIN(P.skin3,736), hero:PIN(P.skin2), imgs:[PIN(P.skin1),PIN(P.skin3),PIN(P.skin4),PIN(P.skin5),PIN(P.skin6)] },
-  { slug:'cheers-bakery', name:'Cheers Bakery', no:'26·03', year:2026, client:'Galletas · Venezuela', accent:'#FF6FAE',
+  { slug:'woman-social-club', deck:true, name:'Woman Social Club', no:'26·05', year:2026, client:'Club social de mujeres', accent:'#7A1F2B',
+    services:['Identidad visual','Ilustración','Caja PR','Papelería'], tags:['identidad','ilustracion','packaging','papeleria'],
+    line:'La riqueza del tiempo compartido',
+    desc:['Woman Social Club es el refugio social para la mujer contemporánea: una membresía para cultivar amistades reales, conversaciones con sustancia y experiencias memorables, lejos del networking transaccional.','La identidad se ancla en la palabra WOMAN, en mayúsculas, como un manifiesto visual: rotunda y estable, para sentir la fuerza del colectivo antes de leer el nombre. La acompañan ilustraciones propias, una caja PR con su troquel, tote bag, tarjetas y stickers en vino y rosa.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('woman-social-club',1), hero:LOC('woman-social-club',1), imgs:PAGES('woman-social-club',2,22) },
+  { slug:'skin-co', deck:true, name:'Skin Co.', no:'26·04', year:2026, client:'Face gym y facial bar', accent:'#8FA67E',
+    services:['Rediseño de logo','Identidad visual','Ilustración','Papelería'], tags:['rediseno','identidad','ilustracion','papeleria'],
+    line:'Train hard. Glow harder.',
+    desc:['Skin Co. es un gimnasio facial y barra de faciales: un espacio donde la piel entrena, que une la estética no invasiva con la filosofía del fitness para lograr resultados visibles en una hora.','Rediseñé su logotipo —todo en mayúsculas para ganar visibilidad y simetría, con el strapline «Face gym — Facial bar» centrado— y construí a su alrededor ilustraciones botánicas, patrones, menú, giftcards y tarjeta de fidelidad en verde salvia y rosa.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('skin-co',1), hero:LOC('skin-co',1), imgs:PAGES('skin-co',2,24) },
+  { slug:'cheers-bakery', deck:true, name:'Cheers Bakery', no:'26·03', year:2026, client:'Galletas · Venezuela', accent:'#FF6FAE',
     services:['Identidad visual','Personaje','Packaging','Papelería'], tags:['identidad','personaje','packaging','papeleria'],
-    line:'Una aventura súper rosa',
-    desc:['Identidad completa para una marca de galletas: logotipo, personaje, empaques, bolsas, etiquetas y piezas para redes.','Es uno de los proyectos donde he tenido más libertad creativa, construido junto a su dueña para que cada pieza se sintiera tan dulce como el producto.'],
-    cover:PIN(P.cheers1,736), hero:PIN(P.cheers2), imgs:[PIN(P.cheers1),PIN(P.cheers3),PIN(P.cheers4),PIN(P.cheers5),PIN(P.cheers6)] },
+    line:'Celebrate with every bite',
+    desc:['Cheers nace de la idea de brindar y celebrar: su misión es demostrar que las cookies también pueden ser el acompañante ideal para celebrar la vida y endulzar momentos.','Un logotipo creado desde cero con trazos sueltos y sencillos, una pandilla de personajes y colores cargados de energía para cajas, bolsas, menú, tarjeta de fidelidad, stickers y todo lo que acompaña a cada galleta.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('cheers-bakery',1), hero:LOC('cheers-bakery',1), imgs:PAGES('cheers-bakery',2,16) },
   { slug:'the-enchanted-spa', deck:true, name:'The Enchanted Spa', no:'26·02', year:2026, client:'Spa móvil infantil · Estados Unidos', accent:'#E44587',
     services:['Identidad visual','Ilustración','Personaje','Packaging'], tags:['identidad','ilustracion','personaje','packaging','papeleria'],
     line:'La magia llega a tu puerta',
     desc:['Un spa móvil infantil que convierte cumpleaños y eventos en experiencias inolvidables, llevando magia, cuidado y belleza directamente a casa.','Creé un hada con turbante y corona como personaje de la marca, y la llevé a frascos, batas, toallas, bolsas, tarjetas, un libro para colorear y hasta la rotulación de la van. Rosas, amarillo mantequilla y celeste para un mundo donde cada niña se siente celebrada.'],
     credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
-    cover:LOC('the-enchanted-spa',11), hero:LOC('the-enchanted-spa',5), imgs:[1,4,6,8,12,14,15,20,19].map(n=>LOC('the-enchanted-spa',n)) },
+    cover:LOC('the-enchanted-spa',1), hero:LOC('the-enchanted-spa',1), imgs:PAGES('the-enchanted-spa',2,20) },
   { slug:'viela', name:'Viela', no:'26·02', year:2026, client:'Moda de playa', accent:'#3FA9A0',
     services:['Identidad visual','Logotipo','Ilustración'], tags:['identidad','ilustracion'],
     line:'Curvas suaves, sal y mar',
     desc:['Identidad visual con un logotipo de trazo fluido y una paleta inspirada en la playa.','Logotipo, paleta, patrones y aplicaciones para campaña y redes.'],
     cover:BE('9aac7d244864563.69a08e653dc13.jpg'), hero:BE('79b82f244864563.69a08e65428ce.jpg'),
     imgs:['9aac7d244864563.69a08e653dc13.jpg','f29917244864563.69a08e653f98b.jpg','67aa3a244864563.69a08e654139e.jpg','70f17a244864563.69a08e6541b4f.jpg','68ed95244864563.69a08e6540719.jpg'].map(f=>BE(f)) },
-  { slug:'lazzzy', name:'Lazzzy', no:'26·01', year:2026, client:'Comida rápida saludable', accent:'#F08A24',
-    services:['Identidad visual','Ilustración','Packaging'], tags:['identidad','ilustracion','packaging'],
-    line:'Comida sana para días con flojera',
-    desc:['«Lazzzy nació de la idea de crear una marca de comida rápida saludable, solo de calentar o pre cocinar y servir.»','Una identidad llena de color, ilustraciones y comida, con empaques que se ven tan frescos como lo que llevan dentro.'],
-    cover:BE('21f7ea243343075.697ff9b31e570.png'), hero:BE('4da0d6243343075.697ff7a7da189.png'),
-    imgs:['21f7ea243343075.697ff9b31e570.png','5c5d05243343075.697ff9b32158d.png','b1adb2243343075.697ff9b31ea81.png','34c510243343075.697ff9b31f5dd.png','2ec574243343075.697ff9b31fb87.png','3bee2e243343075.697ff9b320de1.png'].map(f=>BE(f)) },
+  { slug:'lazzzy', deck:true, name:'Lazzzy', no:'26·01', year:2026, client:'Comida empacada al vacío · Venezuela', accent:'#F08A24',
+    services:['Identidad visual','Ilustración','Packaging','Etiquetas'], tags:['identidad','ilustracion','packaging'],
+    line:'Menos cocina, más vida',
+    desc:['El nombre nace de «lazy», con una triple z que simboliza descanso y pausa. Pero Lazzzy no es para gente floja: es para quienes tienen vidas ocupadas, valoran su tiempo y no quieren sacrificar calidad ni sabor.','Una identidad de comida empacada al vacío con etiquetas, ilustraciones de personajes en pausa, tote bag y una paleta naranja, verde y crema. Comer bien, nunca fue tan fácil.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('lazzzy',1), hero:LOC('lazzzy',1), imgs:PAGES('lazzzy',2,13) },
   { slug:'sicilian-bakery', name:'Sicilian Bakery', no:'25·12', year:2025, client:'Panadería · Virginia, EE. UU.', accent:'#6B4A3A',
     services:['Rediseño','Packaging','Etiquetas'], tags:['rediseno','packaging'],
     line:'Del horno venezolano a Virginia',
@@ -934,13 +943,14 @@ const PROJECTS = [
     services:['Identidad visual','Ilustración','Packaging','Papelería'], tags:['identidad','ilustracion','packaging','papeleria'],
     line:'Cada tabla, una historia',
     desc:['Tablas Guay es un proyecto artesanal en España que crea tablas de picoteo para eventos y ocasiones especiales, hechas a mano con ingredientes frescos y una presentación que convierte cada reunión en algo memorable.','El símbolo, dibujado a mano, es una tabla servida bajo un arco con dos copas: el momento de compartir. Lo llevé a bolsas, menús, etiquetas, stickers y redes en una paleta de vino, cacao y crema.'],
-    cover:LOC('tablas-guay',6), hero:LOC('tablas-guay',1), imgs:[3,4,7,8,9,12].map(n=>LOC('tablas-guay',n)) },
-  { slug:'diez-de-diez', name:'10/10', no:'25·02', year:2025, client:'Hamburguesas', accent:'#2D4CE0',
-    services:['Identidad visual','Ilustración'], tags:['identidad','ilustracion'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('tablas-guay',1), hero:LOC('tablas-guay',1), imgs:PAGES('tablas-guay',2,13) },
+  { slug:'diez-de-diez', deck:true, name:'10/10', no:'25·02', year:2025, client:'Hamburguesas', accent:'#2D4CE0',
+    services:['Identidad visual','Ilustración','Estrategia verbal'], tags:['identidad','ilustracion','packaging'],
     line:'¡Qué nota!',
-    desc:['Una marca de hamburguesas que parte de una idea simple: el 10/10 como la nota máxima.','Tipografía gruesa, texturas de impresión y un azul eléctrico que grita sabor.'],
-    cover:BE('2a8622220153391.67be11e1a4dfa.jpg'), hero:BE('2a8622220153391.67be11e1a4dfa.jpg'),
-    imgs:['df119e220153391.67be11e1a351a.jpg','59ea2b220153391.67be11e1a41f6.jpg','f10e38220153391.67be174eacfa0.jpg','317fcb220153391.67be174eaa922.jpg','6c8506220153391.67be174ead75c.jpg'].map(f=>BE(f)) },
+    desc:['Para 10/10 creé una estrategia de personalidad gráfica y verbal: una marca genuinamente fresca que adopta el dialecto popular y una temática de colegio, sin dejar de lado que es comida rápida.','La idea parte del 10/10 como la nota máxima: un logotipo limpio y minimalista que deja espacio a ilustraciones, stickers y frases como «La mayor nota» o «Tú y yo somos un 10/10».'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('diez-de-diez',1), hero:LOC('diez-de-diez',1), imgs:PAGES('diez-de-diez',2,12) },
   { slug:'la-manzanita-fit', name:'La Manzanita Fit', no:'24·11', year:2024, client:'Fitness', accent:'#D9322E',
     services:['Identidad visual','Packaging'], tags:['identidad','packaging'],
     line:'Energía con mordida',
@@ -1011,17 +1021,18 @@ function follow() {
 /* ---------- Galería a pantalla completa ---------- */
 const SLIDES = [
   ['the-enchanted-spa', LOC('the-enchanted-spa', 5), 'The Enchanted Spa', 'Personaje y rotulación'],
-  ['cheers-bakery', PIN(P.cheers1), 'Cheers Bakery', 'Packaging y personaje'],
-  ['revive-cafe', PIN(P.rev1), 'Revive Café', 'Vasos y logotipo'],
-  ['hilitos-y-puntaditas', PIN(P.hil2), 'Hilitos y Puntaditas', 'Producto y personaje'],
-  ['woman-social-club', PIN(P.wsc4), 'Woman Social Club', 'Caja PR'],
-  ['lazzzy', BE('21f7ea243343075.697ff9b31e570.png'), 'Lazzzy', 'Empaque'],
-  ['skin-co', PIN(P.skin3), 'Skin Co.', 'Tarjeta de fidelidad'],
-  ['viela', BE('9aac7d244864563.69a08e653dc13.jpg'), 'Viela', 'Campaña'],
-  ['ribs-bbq', LOC('ribs-bbq', 18), 'Ribs BBQ', 'Packaging y personaje']
+  ['cheers-bakery', LOC('cheers-bakery', 13), 'Cheers Bakery', 'Bolsas y logotipo'],
+  ['revive-cafe', LOC('revive-cafe', 24), 'Revive Café', 'Vasos y logotipo'],
+  ['woman-social-club', LOC('woman-social-club', 8), 'Woman Social Club', 'Caja PR'],
+  ['ribs-bbq', LOC('ribs-bbq', 18), 'Ribs BBQ', 'Packaging y personaje'],
+  ['skin-co', LOC('skin-co', 13), 'Skin Co.', 'Identidad e ilustración'],
+  ['lazzzy', LOC('lazzzy', 3), 'Lazzzy', 'Logotipo y empaque'],
+  ['serena-floral', LOC('serena-floral', 15), 'Serena Floral', 'Ramo y empaque'],
+  ['fyp-constructora', LOC('fyp-constructora', 15), 'F&P Constructora', 'Rotulación'],
+  ['hilitos-y-puntaditas', PIN(P.hil2), 'Hilitos y Puntaditas', 'Producto y personaje']
 ];
 const reel = $('#seleccion');
-$('#slides').innerHTML = SLIDES.map(([slug, src, name, what], i) => `<figure class="slide${i ? '' : ' on'}">${imgTag(src, `${name}: ${what}`)}<figcaption><div><b>${name}</b><small>${what}</small></div><a href="#proyecto/${slug}">Ver proyecto →</a></figcaption></figure>`).join('');
+$('#slides').innerHTML = SLIDES.map(([slug, src, name, what], i) => `<figure class="slide${i ? '' : ' on'}" style="--bg:url('${src}')">${imgTag(src, `${name}: ${what}`)}<figcaption><div><b>${name}</b><small>${what}</small></div><a href="#proyecto/${slug}">Ver proyecto →</a></figcaption></figure>`).join('');
 const slides = $$('.slide', reel), reelCount = $('#reel-count'), reelBar = $('.reel-bar i');
 /* Se pasa con botones (y deslizando en el celular); la página sigue su scroll normal */
 let cur = 0;
@@ -1081,9 +1092,9 @@ function spans(n) {
 }
 /* Presentaciones horizontales: se muestran completas, una ancha y luego en pares */
 function deckSpans(n) {
-  const out = [6]; let left = n - 1;
-  while (left > 0) { if (left === 1) { out.push(6); left = 0; } else { out.push(3, 3); left -= 2; } }
-  return out.slice(0, n);
+  /* la portada ya va arriba a todo el ancho: aquí las páginas van de dos en dos y la última, si queda sola, centrada */
+  const out = []; for (let i = 0; i < n; i++) out.push(i === n - 1 && n % 2 ? 'c' : 3);
+  return out;
 }
 function openCase(slug) {
   const i = PROJECTS.findIndex(p => p.slug === slug); if (i < 0) return;
