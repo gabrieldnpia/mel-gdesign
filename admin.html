@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel · mel.gdesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500..700&family=Inter:wght@400..800&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF7F3;--paper-2:#EFE6E1;--ink:#221A1E;--ink-2:#64555C;--pink:#FF4FA3;--pink-2:#FFC2DD;--pink-3:#FFE8F2;--magenta:#D91F77;--teal:#2DB3A6;--line:rgba(34,26,30,.14);
+  --display:"Helvetica Neue","HelveticaNeue-Bold","Helvetica Neue Bold",Helvetica,Arial,sans-serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--hand:"Caveat","Bradley Hand",cursive}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px clamp(16px,3vw,40px);border-bottom:1.5px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:5}
+.brand{font:700 26px/1 var(--display);letter-spacing:-.04em;text-decoration:none}
+.brand small{font:700 22px/1 var(--hand);color:var(--magenta);margin-left:8px;letter-spacing:0}
+.top nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{border:1.5px solid var(--ink);border-radius:999px;padding:8px 15px;background:transparent;font-size:13.5px;font-weight:600;text-decoration:none;line-height:1}
+.pill:hover{background:var(--ink);color:var(--paper)}
+.pill.on{background:var(--ink);color:var(--paper)}
+.pill.pk{background:var(--pink);border-color:var(--pink);color:var(--ink)}
+main{padding:clamp(20px,3vw,40px);max-width:1240px;margin:0 auto}
+h1{margin:0 0 6px;font:700 clamp(34px,5vw,64px)/.95 var(--display);letter-spacing:-.04em}
+h1 em{font-style:normal;color:var(--magenta)}
+.sub{margin:0 0 24px;color:var(--ink-2);max-width:60ch}
+.card{background:#fff;border:1.5px solid var(--ink);border-radius:22px;padding:clamp(16px,2vw,26px)}
+.card h2{margin:0 0 14px;font:700 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.login{max-width:560px;margin:8vh auto;text-align:center}
+.login .big{font:700 clamp(30px,4vw,46px)/1 var(--display);letter-spacing:-.04em;margin:8px 0 10px}
+.gbtn{display:inline-flex;align-items:center;gap:12px;border:1.5px solid var(--ink);background:#fff;border-radius:999px;padding:13px 22px;font-weight:700;font-size:15px;margin-top:8px}
+.gbtn:hover{background:var(--pink-3)}
+.gbtn svg{width:20px;height:20px}
+.note{font-size:13px;color:var(--ink-2);margin-top:16px}
+.err{margin-top:16px;padding:12px 14px;border-radius:14px;background:#FFE4E4;border:1.5px solid #D93030;color:#7A1111;font-size:14px;text-align:left}
+.steps{counter-reset:s;list-style:none;padding:0;margin:18px 0 0;text-align:left;display:grid;gap:12px}
+.steps li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;border:1.5px solid var(--line);border-radius:16px;background:var(--paper)}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:11px;width:26px;height:26px;border-radius:50%;background:var(--pink);color:var(--ink);font-weight:800;display:grid;place-items:center;font-size:13px}
+.steps b{display:block;margin-bottom:2px}
+.steps code,.code{font:600 12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pink-3);padding:1px 6px;border-radius:6px;word-break:break-all}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px}
+.range{display:flex;gap:8px;flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px}
+.live i{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(45,179,166,.5);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(45,179,166,0)}100%{box-shadow:0 0 0 0 rgba(45,179,166,0)}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px}
+.kpi{background:var(--pink-3);border:1.5px solid var(--ink);border-radius:20px;padding:16px 18px}
+.kpi small{display:block;font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.kpi b{display:block;margin:10px 0 4px;font:700 clamp(30px,3.4vw,44px)/1 var(--display);letter-spacing:-.04em}
+.kpi span{font-size:12.5px;font-weight:700}
+.up{color:#14804A}.down{color:#C0262D}.flat{color:var(--ink-2)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid .wide{grid-column:1/-1}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.chart{width:100%;height:auto;display:block}
+.chart rect{fill:var(--pink);transition:fill .15s}
+.chart rect:hover{fill:var(--magenta)}
+.chart text{font:600 11px var(--sans);fill:var(--ink-2)}
+.legend{display:flex;gap:16px;font-size:12.5px;color:var(--ink-2);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--pink);margin-right:6px}
+.rows{display:grid;gap:9px}
+.r{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;font-size:14px}
+.r .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r .v{font-weight:800;font-variant-numeric:tabular-nums}
+.r .tr{grid-column:1/-1;height:7px;border-radius:99px;background:var(--paper-2);overflow:hidden}
+.r .tr i{display:block;height:100%;background:var(--pink);border-radius:99px}
+.empty{color:var(--ink-2);font-size:14px;margin:0}
+.skel{opacity:.5}
+footer{padding:30px clamp(16px,3vw,40px);color:var(--ink-2);font-size:12.5px;text-align:center}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">mel.<small>panel</small></a>
+  <nav>
+    <a class="pill" href="index.html">← Ver la web</a>
+    <button class="pill" id="out" type="button" hidden>Cerrar sesión</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Falta configurar -->
+  <section id="setup" hidden class="card login" style="max-width:720px">
+    <div class="big">Falta un paso 🛠</div>
+    <p class="sub" style="margin:0 auto">Para ver las estadísticas hay que conectar Google Analytics. Se hace una sola vez; después de esto, el panel funciona solo.</p>
+    <ol class="steps" id="stepsList"></ol>
+  </section>
+
+  <!-- Inicio de sesión -->
+  <section id="login" hidden class="card login">
+    <div style="font:700 30px/1 var(--hand);color:var(--magenta)">solo para Mel y su equipo</div>
+    <div class="big">Panel de estadísticas</div>
+    <p class="sub" style="margin:0 auto">Entra con la cuenta de Google que tiene acceso a Analytics de esta web. Google decide quién puede ver los datos; aquí no se guarda ninguna contraseña.</p>
+    <button class="gbtn" id="in" type="button">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+      Entrar con Google
+    </button>
+    <div id="loginErr"></div>
+    <p class="note">Tus visitas a la web no se cuentan mientras uses este panel en este navegador.</p>
+  </section>
+
+  <!-- Panel -->
+  <section id="dash" hidden>
+    <h1>Así va <em>la web</em></h1>
+    <p class="sub" id="who">Datos de Google Analytics.</p>
+    <div class="bar">
+      <div class="range" role="group" aria-label="Periodo">
+        <button class="pill" data-d="7" type="button">7 días</button>
+        <button class="pill on" data-d="28" type="button">28 días</button>
+        <button class="pill" data-d="90" type="button">90 días</button>
+      </div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+        <span class="live"><i></i><span id="rt">– en línea ahora</span></span>
+        <button class="pill" id="refresh" type="button">↻ Actualizar</button>
+      </div>
+    </div>
+    <div id="dashErr"></div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="grid">
+      <div class="card wide"><h2>Visitantes por día</h2><div id="chart"></div>
+        <div class="legend"><span><i></i>Personas</span><span id="chartNote"></span></div></div>
+      <div class="card"><h2>Proyectos y secciones más vistos</h2><div class="rows" id="pages"></div></div>
+      <div class="card"><h2>Qué hacen los visitantes</h2><div class="rows" id="events"></div></div>
+      <div class="card"><h2>Países</h2><div class="rows" id="countries"></div></div>
+      <div class="card"><h2>De dónde llegan</h2><div class="rows" id="channels"></div></div>
+      <div class="card"><h2>Dispositivos</h2><div class="rows" id="devices"></div></div>
+      <div class="card"><h2>Páginas o redes que los traen</h2><div class="rows" id="sources"></div></div>
+    </div>
+  </section>
+</main>
+<footer>Los datos pueden tardar unas horas en aparecer. Solo cuentan las personas que aceptan las cookies, y las visitas del equipo de Mel se excluyen.</footer>
+
+<script src="analytics-config.js"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.MEL_CONFIG || {};
+  const $ = s => document.querySelector(s);
+  const SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
+  const TK = 'mel-admin-token';
+  let token = null, client = null, days = 28;
+
+  /* esta pestaña no debe contarse como visita */
+  try { localStorage.setItem('mel-no-track', '1'); } catch (e) {}
+
+  const store = {
+    get() { try { const t = JSON.parse(sessionStorage.getItem(TK) || 'null'); return t && t.exp > Date.now() ? t.v : null; } catch (e) { return null; } },
+    set(v, secs) { try { sessionStorage.setItem(TK, JSON.stringify({ v, exp: Date.now() + (secs - 60) * 1000 })); } catch (e) {} },
+    clear() { try { sessionStorage.removeItem(TK); } catch (e) {} }
+  };
+
+  const show = id => { ['setup', 'login', 'dash'].forEach(k => $('#' + k).hidden = k !== id); $('#out').hidden = id !== 'dash'; };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const nf = n => Number(n || 0).toLocaleString('es');
+  const dur = s => { s = Math.round(Number(s) || 0); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
+  /* ---------- 0. ¿Está configurado? ---------- */
+  const missing = [];
+  if (!/^G-[A-Z0-9]+$/i.test(C.GA_MEASUREMENT_ID || '')) missing.push(['Crea tu propiedad de Google Analytics 4', 'En <a href="https://analytics.google.com" target="_blank" rel="noopener">analytics.google.com</a> crea una propiedad y un flujo de datos «Web» con la dirección <span class="code">gabrieldnpia.github.io</span>. Copia el <b>ID de medición</b> (empieza con <span class="code">G-</span>) y pégalo en <span class="code">analytics-config.js</span> → <span class="code">GA_MEASUREMENT_ID</span>.']);
+  if (!/^\d{5,}$/.test(C.GA_PROPERTY_ID || '')) missing.push(['Copia el ID de la propiedad', 'En Analytics: Administrar → Detalles de la propiedad. Copia el <b>ID de propiedad</b> (solo números) y pégalo en <span class="code">GA_PROPERTY_ID</span>.']);
+  if (!/\.apps\.googleusercontent\.com$/.test(C.OAUTH_CLIENT_ID || '')) missing.push(['Crea el acceso con Google', 'En <a href="https://console.cloud.google.com" target="_blank" rel="noopener">console.cloud.google.com</a>: crea un proyecto → activa «Google Analytics Data API» → Pantalla de consentimiento (externa, en producción) → Credenciales → ID de cliente de OAuth «Aplicación web», con el origen autorizado <span class="code">https://gabrieldnpia.github.io</span>. Copia el ID de cliente y pégalo en <span class="code">OAUTH_CLIENT_ID</span>.']);
+  if (missing.length) {
+    $('#stepsList').innerHTML = missing.map(m => `<li><b>${m[0]}</b>${m[1]}</li>`).join('');
+    show('setup'); return;
+  }
+
+  /* ---------- 1. Inicio de sesión con Google ---------- */
+  function loadGIS() {
+    return new Promise((ok, no) => {
+      if (window.google && google.accounts) return ok();
+      const s = document.createElement('script');
+      s.src = 'https://accounts.google.com/gsi/client'; s.async = true; s.onload = ok; s.onerror = () => no(new Error('No se pudo cargar el inicio de sesión de Google. Revisa tu conexión.'));
+      document.head.appendChild(s);
+    });
+  }
+  function loginError(msg) { $('#loginErr').innerHTML = msg ? `<div class="err">${msg}</div>` : ''; }
+  async function ensureClient() {
+    await loadGIS();
+    if (client) return client;
+    client = google.accounts.oauth2.initTokenClient({
+      client_id: C.OAUTH_CLIENT_ID, scope: SCOPE,
+      callback: r => {
+        if (r.error) return loginError('Google no dio el acceso (' + esc(r.error) + '). Prueba de nuevo.');
+        token = r.access_token; store.set(token, Number(r.expires_in) || 3600); loginError(''); start();
+      },
+      error_callback: e => loginError(e && e.type === 'popup_closed' ? 'Se cerró la ventana de Google antes de terminar.' : 'No se pudo abrir la ventana de Google. Permite las ventanas emergentes e inténtalo de nuevo.')
+    });
+    return client;
+  }
+  $('#in').addEventListener('click', async () => {
+    loginError('');
+    try { (await ensureClient()).requestAccessToken({ prompt: '' }); } catch (e) { loginError(esc(e.message)); }
+  });
+  $('#out').addEventListener('click', () => {
+    if (token && window.google && google.accounts) try { google.accounts.oauth2.revoke(token, () => {}); } catch (e) {}
+    token = null; store.clear(); show('login');
+  });
+
+  /* ---------- 2. Llamadas a la API de Analytics ---------- */
+  async function api(path, body) {
+    const r = await fetch('https://analyticsdata.googleapis.com/v1beta/properties/' + C.GA_PROPERTY_ID + path, {
+      method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { const e = new Error((j.error && j.error.message) || ('Error ' + r.status)); e.status = r.status; throw e; }
+    return j;
+  }
+  const rangeNow = () => ({ startDate: days + 'daysAgo', endDate: 'today' });
+  const M = n => ({ name: n }); const D = n => ({ name: n });
+  const byDesc = m => [{ metric: { metricName: m }, desc: true }];
+
+  async function load() {
+    $('#dashErr').innerHTML = ''; $('#who').textContent = 'Datos de Google Analytics · últimos ' + days + ' días';
+    document.querySelectorAll('#dash .card,.kpi').forEach(c => c.classList.add('skel'));
+    try {
+      const dr = [rangeNow()];
+      const [b1, b2, rt] = await Promise.all([
+        api(':batchRunReports', { requests: [
+          { dateRanges: dr, dimensions: [D('date')], metrics: [M('activeUsers'), M('sessions')], orderBys: [{ dimension: { dimensionName: 'date' } }], limit: 100 },
+          { dateRanges: dr, dimensions: [D('pagePath')], metrics: [M('screenPageViews')], orderBys: byDesc('screenPageViews'), limit: 60 },
+          { dateRanges: dr, dimensions: [D('eventName')], metrics: [M('eventCount')], orderBys: byDesc('eventCount'), limit: 40 },
+          { dateRanges: dr, dimensions: [D('countryId')], metrics: [M('activeUsers')], orderBys: byDesc('activeUsers'), limit: 10 },
+          { dateRanges: dr, dimensions: [D('sessionDefaultChannelGroup')], metrics: [M('sessions')], orderBys: byDesc('sessions'), limit: 8 }
+        ] }),
+        api(':batchRunReports', { requests: [
+          { dateRanges: dr, dimensions: [D('deviceCategory')], metrics: [M('activeUsers')], orderBys: byDesc('activeUsers'), limit: 5 },
+          { dateRanges: dr, dimensions: [D('sessionSource')], metrics: [M('sessions')], orderBys: byDesc('sessions'), limit: 8 },
+          { dateRanges: [rangeNow(), { startDate: (days * 2) + 'daysAgo', endDate: (days + 1) + 'daysAgo' }],
+            metrics: [M('activeUsers'), M('newUsers'), M('sessions'), M('screenPageViews'), M('averageSessionDuration'), M('engagementRate')] }
+        ] }),
+        api(':runRealtimeReport', { metrics: [M('activeUsers')] }).catch(() => null)
+      ]);
+      render(b1.reports, b2.reports, rt);
+    } catch (e) { handleErr(e); }
+    document.querySelectorAll('.skel').forEach(c => c.classList.remove('skel'));
+  }
+
+  function handleErr(e) {
+    if (e.status === 401) { token = null; store.clear(); show('login'); return loginError('La sesión caducó. Vuelve a entrar con Google.'); }
+    let msg = esc(e.message);
+    if (e.status === 403 && /has not been used|disabled|not enabled/i.test(e.message)) msg = 'La «Google Analytics Data API» no está activada en tu proyecto de Google Cloud. Actívala en console.cloud.google.com → APIs y servicios → Biblioteca.';
+    else if (e.status === 403) msg = 'Esta cuenta de Google no tiene acceso a la propiedad de Analytics. Entra con la cuenta dueña, o pídele que te agregue en Analytics → Administrar → Acceso a la propiedad.';
+    else if (e.status === 400 && /property/i.test(e.message)) msg = 'El ID de propiedad no es válido. Revísalo en analytics-config.js.';
+    $('#dashErr').innerHTML = `<div class="err">${msg}</div>`;
+  }
+
+  /* ---------- 3. Dibujar ---------- */
+  const NAMES = { 'diez-de-diez': '10/10', 'fyp-constructora': 'F&P Constructora', 'woman-social-club': 'Woman Social Club', 'skin-co': 'Skin Co.', 'tablas-guay': 'Tablas Guay', 'ribs-bbq': 'Ribs BBQ', 'viko-cookies': 'Viko Cookies', 'the-enchanted-spa': 'The Enchanted Spa', 'la-manzanita-fit': 'La Manzanita Fit', 'hilitos-y-puntaditas': 'Hilitos y Puntaditas', 'revive-cafe': 'Revive Café', 'cheers-bakery': 'Cheers Bakery', 'serena-floral': 'Serena Floral', 'lazzzy': 'Lazzzy', 'viela': 'Viela' };
+  const EV = { page_view: 'Páginas vistas', first_visit: 'Primeras visitas', whatsapp_click: 'Clics en WhatsApp', formulario_iniciado: 'Formularios empezados', formulario_enviado: 'Formularios enviados', copiar_correo: 'Correo copiado', click_red_social: 'Clics en redes', ebook_click: 'Clics en el ebook', cta_proyecto: 'Clics en «Trabajemos juntos» (proyecto)', scroll: 'Scroll hasta el final' };
+  const DEV = { mobile: '📱 Celular', desktop: '💻 Computadora', tablet: 'Tablet', 'smart tv': 'Smart TV' };
+  const CH = { Direct: 'Directo (enlace o QR)', 'Organic Search': 'Buscadores', 'Organic Social': 'Redes sociales', Referral: 'Otras webs', 'Paid Search': 'Búsqueda de pago', Email: 'Correo', Unassigned: 'Sin clasificar', 'Organic Video': 'Video' };
+  const flag = c => /^[A-Z]{2}$/.test(c) ? String.fromCodePoint(...[...c].map(x => 127397 + x.charCodeAt(0))) : '🌐';
+  let regionName = null; try { regionName = new Intl.DisplayNames(['es'], { type: 'region' }); } catch (e) {}
+  const country = c => { try { return (regionName && regionName.of(c)) || c; } catch (e) { return c; } };
+
+  const val = (row, i) => row.metricValues[i].value;
+  const rowsOf = rep => (rep && rep.rows) || [];
+
+  function list(el, items, fmt = nf) {
+    if (!items.length) { el.innerHTML = '<p class="empty">Aún no hay datos en este periodo.</p>'; return; }
+    const max = Math.max(...items.map(i => i.v), 1);
+    el.innerHTML = items.map(i => `<div class="r"><span class="n" title="${esc(i.n)}">${esc(i.n)}</span><span class="v">${fmt(i.v)}</span><span class="tr"><i style="width:${Math.max(3, i.v / max * 100)}%"></i></span></div>`).join('');
+  }
+  function delta(cur, prev, lower) {
+    cur = Number(cur); prev = Number(prev);
+    if (!isFinite(prev) || prev === 0) return '<span class="flat">sin periodo anterior</span>';
+    const p = (cur - prev) / prev * 100; const good = lower ? p <= 0 : p >= 0;
+    if (Math.abs(p) < 0.5) return '<span class="flat">igual que antes</span>';
+    return `<span class="${good ? 'up' : 'down'}">${p > 0 ? '▲' : '▼'} ${Math.abs(p).toFixed(0)} % vs. periodo anterior</span>`;
+  }
+
+  function render(r1, r2, rt) {
+    /* tarjetas */
+    const tot = rowsOf(r2[2]); const cur = tot.find(r => r.dimensionValues[0].value === 'date_range_0'); const prev = tot.find(r => r.dimensionValues[0].value === 'date_range_1');
+    const g = (row, i) => row ? val(row, i) : 0;
+    const K = [['Visitantes', 0, nf], ['Visitantes nuevos', 1, nf], ['Visitas', 2, nf], ['Páginas vistas', 3, nf], ['Tiempo promedio', 4, dur], ['Interacción', 5, v => (Number(v) * 100).toFixed(0) + ' %']];
+    $('#kpis').innerHTML = K.map(([t, i, f]) => `<div class="kpi"><small>${t}</small><b>${f(g(cur, i))}</b>${delta(g(cur, i), g(prev, i))}</div>`).join('');
+
+    /* en línea ahora */
+    const n = rt && rowsOf(rt)[0] ? Number(val(rowsOf(rt)[0], 0)) : 0;
+    $('#rt').textContent = n + (n === 1 ? ' persona en línea ahora' : ' personas en línea ahora');
+
+    /* gráfico diario */
+    const daily = rowsOf(r1[0]).map(r => ({ d: r.dimensionValues[0].value, u: Number(val(r, 0)), s: Number(val(r, 1)) }));
+    if (!daily.length) $('#chart').innerHTML = '<p class="empty">Aún no hay visitas en este periodo.</p>';
+    else {
+      const W = 1000, H = 220, pad = 26, max = Math.max(...daily.map(x => x.u), 1), bw = (W - 20) / daily.length;
+      const fd = s => s.slice(6, 8) + '/' + s.slice(4, 6);
+      $('#chart').innerHTML = `<svg class="chart" viewBox="0 0 ${W} ${H + pad}" role="img" aria-label="Visitantes por día">` +
+        daily.map((x, i) => { const h = Math.max(2, x.u / max * (H - 10)); return `<rect x="${10 + i * bw + bw * .12}" y="${H - h}" width="${bw * .76}" height="${h}" rx="3"><title>${fd(x.d)}: ${x.u} personas, ${x.s} visitas</title></rect>`; }).join('') +
+        `<text x="10" y="${H + 18}">${fd(daily[0].d)}</text><text x="${W - 10}" y="${H + 18}" text-anchor="end">${fd(daily.at(-1).d)}</text><text x="${W - 10}" y="12" text-anchor="end">máx. ${max} al día</text></svg>`;
+    }
+    $('#chartNote').textContent = '';
+
+    /* proyectos y secciones */
+    const pages = {};
+    rowsOf(r1[1]).forEach(r => {
+      const m = r.dimensionValues[0].value.match(/\/proyecto\/([\w-]+)/);
+      const label = m ? 'Proyecto: ' + (NAMES[m[1]] || m[1].replace(/-/g, ' ')) : (/\.html?$/.test(r.dimensionValues[0].value) && !/index/.test(r.dimensionValues[0].value) ? null : 'Inicio');
+      if (label) pages[label] = (pages[label] || 0) + Number(val(r, 0));
+    });
+    list($('#pages'), Object.entries(pages).map(([n, v]) => ({ n, v })).sort((a, b) => b.v - a.v).slice(0, 12));
+
+    /* eventos */
+    const ev = rowsOf(r1[2]).filter(r => r.dimensionValues[0].value !== 'user_engagement' && r.dimensionValues[0].value !== 'session_start')
+      .map(r => ({ n: EV[r.dimensionValues[0].value] || r.dimensionValues[0].value, v: Number(val(r, 0)) })).slice(0, 10);
+    list($('#events'), ev);
+
+    list($('#countries'), rowsOf(r1[3]).map(r => ({ n: flag(r.dimensionValues[0].value) + ' ' + country(r.dimensionValues[0].value), v: Number(val(r, 0)) })));
+    list($('#channels'), rowsOf(r1[4]).map(r => ({ n: CH[r.dimensionValues[0].value] || r.dimensionValues[0].value, v: Number(val(r, 0)) })));
+    list($('#devices'), rowsOf(r2[0]).map(r => ({ n: DEV[r.dimensionValues[0].value] || r.dimensionValues[0].value, v: Number(val(r, 0)) })));
+    list($('#sources'), rowsOf(r2[1]).map(r => ({ n: r.dimensionValues[0].value === '(direct)' ? 'Directo (enlace o QR)' : r.dimensionValues[0].value, v: Number(val(r, 0)) })));
+  }
+
+  /* ---------- 4. Controles ---------- */
+  document.querySelectorAll('.range .pill').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.range .pill').forEach(x => x.classList.toggle('on', x === b)); days = Number(b.dataset.d); load();
+  }));
+  $('#refresh').addEventListener('click', load);
+  setInterval(() => { if (!$('#dash').hidden && token && !document.hidden) load(); }, 120000);
+
+  function start() { show('dash'); $('#who').textContent = 'Datos de Google Analytics · últimos ' + days + ' días'; load(); }
+  const saved = store.get();
+  if (saved) { token = saved; start(); } else show('login');
+})();
+</script>
+</body>
+</html>
