@@ -113,7 +113,7 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 /* Stickers de personajes (Garden Eight: objetos flotantes; Nicelab: personajes IP) */
 .stickers{position:absolute;inset:0;pointer-events:none;z-index:1}
 .stk{position:absolute;left:var(--x);top:var(--y);width:var(--w);pointer-events:auto;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;filter:drop-shadow(0 10px 14px rgba(34,26,30,.16));animation:bob var(--d,7s) ease-in-out infinite;animation-delay:var(--dl,0s);transition:scale .2s}
-.stk svg{display:block;width:100%;height:auto;transform:rotate(var(--r,0deg));overflow:visible}
+.stk svg,.stk img{display:block;width:100%;height:auto;transform:rotate(var(--r,0deg));overflow:visible}
 .stk:hover{scale:1.05}
 .stk.drag,.obj.drag{cursor:grabbing;animation-play-state:paused;scale:1.08}
 @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -10px}}
@@ -124,7 +124,7 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
   .seal{right:-68px;top:10px}
   .hero-body{grid-template-columns:1fr;gap:20px}
   .hero-intro{justify-self:start}
-  .stickers{position:relative;inset:auto;height:190px;margin-top:10px}
+  .stickers{position:relative;inset:auto;height:300px;margin-top:10px}
   .stk{left:var(--mx);top:var(--my);width:var(--mw)}
   .drag-hint{left:var(--mx);top:var(--my)}
   .hero{padding-bottom:96px}
@@ -469,25 +469,31 @@ fieldset.f{border:0;margin:0;padding:0}
     </p>
   </div>
 
-  <div class="stickers" aria-label="Personajes decorativos que puedes arrastrar">
-    <span class="drag-hint" style="--x:66%;--y:30%;--mx:58%;--my:-6px" aria-hidden="true">¡arrástrame!</span>
-    <div class="stk" tabindex="0" role="img" aria-label="Globo de diálogo que dice holiii (arrastrable)" style="--x:76%;--y:17%;--w:clamp(110px,10vw,170px);--r:6deg;--d:7.5s;--mx:62%;--my:20px;--mw:104px">
-      <svg viewBox="0 0 160 100"><path d="M24 8h112a16 16 0 0 1 16 16v38a16 16 0 0 1-16 16H62L40 94l4-16H24A16 16 0 0 1 8 62V24A16 16 0 0 1 24 8z" fill="#fff" stroke="#221A1E" stroke-width="3" stroke-linejoin="round"/><text x="80" y="55" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="36" fill="#D91F77">¡holiii!</text></svg>
+  <div class="stickers" aria-label="Marcas y personajes creados por Mel, puedes arrastrarlos">
+    <span class="drag-hint" style="--x:17%;--y:66%;--mx:64%;--my:222px" aria-hidden="true">¡arrástrame!</span>
+    <div class="stk" tabindex="0" role="img" aria-label="Galletita rosa caminando (arrastrable)" style="--x:62%;--y:31%;--w:clamp(96px,8.4vw,130px);--r:-6deg;--d:7.5s;--mx:54%;--my:6px;--mw:70px">
+      <img src="img/inicio/galletita-rosa.png" alt="" width="363" height="428" draggable="false">
     </div>
-    <div class="stk" tabindex="0" role="img" aria-label="Corazón sonriente (arrastrable)" style="--x:55%;--y:47%;--w:clamp(84px,8.4vw,140px);--r:-10deg;--d:6.2s;--mx:2%;--my:24px;--mw:80px">
-      <svg viewBox="0 0 120 110"><path d="M60 100S12 72 12 39C12 24 23 12 38 12c9 0 17 5 22 13 5-8 13-13 22-13 15 0 26 12 26 27 0 33-48 61-48 61z" fill="#FF4FA3" stroke="#221A1E" stroke-width="3" stroke-linejoin="round"/><ellipse cx="33" cy="33" rx="7" ry="4.2" fill="#fff" opacity=".75" transform="rotate(-32 33 33)"/><g fill="#221A1E"><ellipse cx="49" cy="54" rx="3.6" ry="4.8"/><ellipse cx="71" cy="54" rx="3.6" ry="4.8"/></g><path d="M54 64q6 6 12 0" fill="none" stroke="#221A1E" stroke-width="3" stroke-linecap="round"/><g fill="#FFE8F2"><ellipse cx="40" cy="64" rx="6" ry="3.6"/><ellipse cx="80" cy="64" rx="6" ry="3.6"/></g></svg>
+    <div class="stk" tabindex="0" role="img" aria-label="Logo de The Enchanted Spa (arrastrable)" style="--x:77%;--y:31%;--w:clamp(170px,15vw,230px);--r:5deg;--d:8s;--dl:-1s;--mx:3%;--my:112px;--mw:128px">
+      <img src="img/inicio/the-enchanted-spa.png" alt="" width="764" height="335" draggable="false">
     </div>
-    <div class="stk" tabindex="0" role="img" aria-label="Galletita con chispas (arrastrable)" style="--x:70%;--y:45%;--w:clamp(110px,11vw,180px);--r:8deg;--d:7s;--dl:-2s;--mx:24%;--my:70px;--mw:108px">
-      <svg viewBox="0 0 120 120"><path d="M60 12c9 0 13 4 20 6 8 2 15 7 18 15 3 7 0 12 3 19 3 8 2 15-3 22-5 8-11 14-20 18-8 3-15 2-22 3-9 1-16-2-23-7-7-6-12-12-14-21-2-7 0-13-1-20-1-8 2-15 8-21 6-7 13-10 21-12 5-1 8-2 13-2z" fill="#E9B472" stroke="#221A1E" stroke-width="3" stroke-linejoin="round"/><g fill="#6A3B22"><ellipse cx="35" cy="38" rx="5" ry="4"/><ellipse cx="80" cy="30" rx="4.5" ry="3.6"/><ellipse cx="94" cy="60" rx="4.4" ry="3.6"/><ellipse cx="31" cy="86" rx="4" ry="3.4"/><ellipse cx="64" cy="97" rx="4.6" ry="3.6"/><ellipse cx="86" cy="88" rx="3.8" ry="3.2"/></g><g fill="#221A1E"><ellipse cx="50" cy="60" rx="3.6" ry="4.8"/><ellipse cx="72" cy="60" rx="3.6" ry="4.8"/></g><path d="M55 70q6 6 12 0" fill="none" stroke="#221A1E" stroke-width="3" stroke-linecap="round"/><g fill="#FF6FB0" opacity=".85"><ellipse cx="41" cy="70" rx="6.5" ry="4"/><ellipse cx="81" cy="70" rx="6.5" ry="4"/></g></svg>
+    <div class="stk" tabindex="0" role="img" aria-label="Logo de Serena Floral (arrastrable)" style="--x:47.5%;--y:31%;--w:clamp(130px,11vw,170px);--r:-4deg;--d:9s;--dl:-3s;--mx:6%;--my:214px;--mw:108px">
+      <img src="img/inicio/serena-floral.png" alt="" width="604" height="389" draggable="false">
     </div>
-    <div class="stk" tabindex="0" role="img" aria-label="Vaso de café sonriente (arrastrable)" style="--x:87%;--y:40%;--w:clamp(80px,7.4vw,124px);--r:-6deg;--d:8s;--dl:-1s;--mx:78%;--my:86px;--mw:70px">
-      <svg viewBox="0 0 120 150"><g stroke="#221A1E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M46 26c-6-7 5-11 0-19M62 26c-6-7 5-11 0-19M78 26c-6-7 5-11 0-19" fill="none"/><path d="M28 44h64l-8 88a9 9 0 0 1-9 8H45a9 9 0 0 1-9-8z" fill="#fff"/><rect x="21" y="32" width="78" height="14" rx="7" fill="#FF4FA3"/><path d="M31 72h58l-3 34H34z" fill="#FFC2DD"/></g><g fill="#221A1E"><ellipse cx="50" cy="86" rx="3.4" ry="4.4"/><ellipse cx="70" cy="86" rx="3.4" ry="4.4"/></g><path d="M55 94q5 5 10 0" fill="none" stroke="#221A1E" stroke-width="3" stroke-linecap="round"/><g fill="#FF4FA3" opacity=".7"><ellipse cx="42" cy="95" rx="5.5" ry="3.4"/><ellipse cx="78" cy="95" rx="5.5" ry="3.4"/></g></svg>
+    <div class="stk" tabindex="0" role="img" aria-label="Gatito azul con su bebida (arrastrable)" style="--x:85%;--y:49%;--w:clamp(96px,8.4vw,125px);--r:6deg;--d:6.8s;--dl:-2s;--mx:77%;--my:4px;--mw:72px">
+      <img src="img/inicio/gatito-azul.png" alt="" width="407" height="491" draggable="false">
     </div>
-    <div class="stk" tabindex="0" role="img" aria-label="Estrella sonriente (arrastrable)" style="--x:62%;--y:66%;--w:clamp(76px,7vw,118px);--r:12deg;--d:6.8s;--dl:-3s;--mx:52%;--my:100px;--mw:72px">
-      <svg viewBox="0 0 120 116"><path d="M60 8l14.5 30.5 33.5 4.5-24.5 23.5 6 33.5L60 84l-29.5 16 6-33.5L12 43l33.5-4.5z" fill="#FFE27A" stroke="#221A1E" stroke-width="3" stroke-linejoin="round"/><g fill="#221A1E"><ellipse cx="51" cy="57" rx="3.3" ry="4.4"/><ellipse cx="69" cy="57" rx="3.3" ry="4.4"/></g><path d="M55 66q5 5 10 0" fill="none" stroke="#221A1E" stroke-width="3" stroke-linecap="round"/><g fill="#FF6FB0" opacity=".8"><ellipse cx="43" cy="66" rx="5" ry="3"/><ellipse cx="77" cy="66" rx="5" ry="3"/></g></svg>
+    <div class="stk" tabindex="0" role="img" aria-label="Logo de Jay Jay Bakery (arrastrable)" style="--x:43%;--y:54%;--w:clamp(190px,17vw,260px);--r:-3deg;--d:8.5s;--dl:-4s;--mx:2%;--my:22px;--mw:148px">
+      <img src="img/inicio/jay-jay-bakery.png" alt="" width="947" height="267" draggable="false">
     </div>
-    <div class="stk" tabindex="0" role="img" aria-label="Nube sonriente (arrastrable)" style="--x:45%;--y:69%;--w:clamp(110px,10vw,170px);--r:-4deg;--d:9s;--dl:-4s;--mx:4%;--my:118px;--mw:100px">
-      <svg viewBox="0 0 150 104"><path d="M38 92C20 92 9 81 9 66c0-13 10-24 23-25 3-17 17-29 35-29 14 0 26 8 31 20 3-1 7-2 11-2 17 0 30 13 30 30 0 19-14 32-32 32z" fill="#fff" stroke="#221A1E" stroke-width="3" stroke-linejoin="round"/><g fill="#221A1E"><ellipse cx="66" cy="60" rx="3.6" ry="4.8"/><ellipse cx="88" cy="60" rx="3.6" ry="4.8"/></g><path d="M71 70q6 6 12 0" fill="none" stroke="#221A1E" stroke-width="3" stroke-linecap="round"/><g fill="#FF6FB0" opacity=".75"><ellipse cx="57" cy="70" rx="6" ry="3.6"/><ellipse cx="97" cy="70" rx="6" ry="3.6"/></g></svg>
+    <div class="stk" tabindex="0" role="img" aria-label="Galleta de chocolate caminando (arrastrable)" style="--x:65%;--y:51%;--w:clamp(90px,7.8vw,118px);--r:8deg;--d:7s;--dl:-5s;--mx:44%;--my:108px;--mw:66px">
+      <img src="img/inicio/galleta-chocolate.png" alt="" width="325" height="449" draggable="false">
+    </div>
+    <div class="stk" tabindex="0" role="img" aria-label="Personaje cajita (arrastrable)" style="--x:30%;--y:70%;--w:clamp(80px,7vw,105px);--r:-8deg;--d:6.4s;--dl:-1.5s;--mx:52%;--my:214px;--mw:64px">
+      <img src="img/inicio/cajita.png" alt="" width="374" height="453" draggable="false">
+    </div>
+    <div class="stk" tabindex="0" role="img" aria-label="Logo de Ribs BBQ (arrastrable)" style="--x:55%;--y:70%;--w:clamp(100px,9vw,135px);--r:4deg;--d:7.8s;--dl:-2.5s;--mx:70%;--my:110px;--mw:80px">
+      <img src="img/inicio/ribs-bbq.png" alt="" width="450" height="498" draggable="false">
     </div>
   </div>
 
