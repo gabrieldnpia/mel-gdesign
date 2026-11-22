@@ -299,14 +299,16 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 .hola:hover .hola-track{animation-play-state:paused}
 .world-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(30px,4vw,72px);align-items:center;padding:clamp(52px,7vw,112px) var(--gutter) clamp(34px,4vw,64px)}
 .world-lede{margin:24px 0 0;max-width:44ch;font:600 clamp(18px,1.55vw,22px)/1.42 var(--sans);letter-spacing:-.012em}
-.stamps{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,28px);justify-items:center;align-items:center}
-.stamp{--r:0deg;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:clamp(138px,13.5vw,196px);aspect-ratio:1;border:3px solid currentColor;border-radius:50%;box-shadow:inset 0 0 0 6px var(--paper),inset 0 0 0 8px currentColor;transform:rotate(var(--r));font:700 clamp(17px,2vw,30px)/1 var(--display);letter-spacing:-.018em;text-transform:uppercase;text-align:center;transition:transform .4s var(--ease)}
+.stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px);justify-items:center;align-items:center}
+.stamp{--r:0deg;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:clamp(122px,11.4vw,172px);aspect-ratio:1;border:3px solid currentColor;border-radius:50%;box-shadow:inset 0 0 0 6px var(--paper),inset 0 0 0 8px currentColor;transform:rotate(var(--r));font:700 clamp(13px,1.5vw,22px)/1 var(--display);letter-spacing:-.018em;text-transform:uppercase;text-align:center;transition:transform .4s var(--ease)}
 .stamp:hover{transform:rotate(0) scale(1.04)}
 .stamp small{font:700 10px/1.1 var(--sans);letter-spacing:.16em;max-width:80%}
 .stamp i{font:600 11.5px/1 var(--sans);font-style:normal;letter-spacing:.1em}
 .s1{color:var(--cherry);--r:-12deg}
 .s2{color:var(--teal);--r:7deg;border-radius:24%}
 .s3{color:#3557F0;--r:-5deg;border-radius:24%}
+.s5{color:#B0306A;--r:4deg}
+.s6{color:#D9771A;--r:-8deg;border-radius:24%}
 .s4{color:var(--magenta);--r:10deg;border-style:dashed;box-shadow:none;background:var(--pink-3)}
 .world-points{list-style:none;margin:0;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,38px)}
 .world-points li{border-top:1.5px solid var(--ink);padding-top:16px}
@@ -314,6 +316,7 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 .world-points h3{margin:12px 0 6px;font:700 25px/1.05 var(--display);letter-spacing:-.024em}
 .world-points p{margin:0;font-size:15px;color:var(--ink-2)}
 @media (max-width:900px){.world-grid{grid-template-columns:1fr}.world-points{grid-template-columns:1fr}}
+@media (max-width:560px){.stamps{grid-template-columns:1fr 1fr}}
 
 /* ---------- E-book ---------- */
 .ebook{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center;background:var(--ink);color:var(--paper);padding:clamp(48px,6vw,100px) var(--gutter)}
@@ -398,6 +401,7 @@ fieldset.f{border:0;margin:0;padding:0}
 .case-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(22px,4vw,70px);padding:clamp(30px,5vw,76px) var(--gutter)}
 .case-title{margin:0;font:700 clamp(50px,8vw,146px)/.84 var(--display);letter-spacing:-.039em}
 .case-line{margin:16px 0 0;font:700 clamp(28px,2.8vw,44px)/1 var(--hand);color:var(--magenta)}
+.case-meta .cred{grid-column:1/-1}
 .case-meta{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 30px;margin:0 0 20px;padding-bottom:16px;border-bottom:1.5px solid var(--ink)}
 .case-meta dt{font:700 11.5px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase}
 .case-meta dd{margin:4px 0 0;font-size:14.5px;color:var(--ink-2)}
@@ -411,12 +415,13 @@ fieldset.f{border:0;margin:0;padding:0}
 .w3{grid-column:span 3;aspect-ratio:4/5}
 .w2{grid-column:span 2;aspect-ratio:3/4}
 .w4{grid-column:span 4;aspect-ratio:3/2}
+.mosaic.deck figure{aspect-ratio:1900/1080}
 .case-next{display:block;margin:clamp(44px,6vw,96px) var(--gutter) 0;padding:28px 0 clamp(44px,6vw,90px);border-top:1.5px solid var(--ink);text-decoration:none}
 .case-next span{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
 .case-next b{display:block;margin-top:8px;font:700 clamp(46px,7vw,124px)/.88 var(--display);letter-spacing:-.039em;transition:color .2s}
 .case-next:hover b{color:var(--magenta)}
 @media (max-width:820px){.case-intro{grid-template-columns:1fr}.case-meta{grid-template-columns:1fr 1fr}}
-@media (max-width:700px){.mosaic{grid-template-columns:1fr 1fr}.w6,.w4{grid-column:1/-1;aspect-ratio:4/3}.w3,.w2{grid-column:span 1;aspect-ratio:4/5}}
+@media (max-width:700px){.mosaic{grid-template-columns:1fr 1fr}.w6,.w4{grid-column:1/-1;aspect-ratio:4/3}.w3,.w2{grid-column:span 1;aspect-ratio:4/5}.mosaic.deck figure{grid-column:1/-1;aspect-ratio:1900/1080}}
 
 /* ---------- Aviso ---------- */
 .toast{position:fixed;left:50%;bottom:24px;z-index:90;translate:-50% 20px;opacity:0;background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;transition:opacity .25s,translate .25s;pointer-events:none;max-width:calc(100vw - 32px);text-align:center}
@@ -612,7 +617,7 @@ fieldset.f{border:0;margin:0;padding:0}
         <a class="cv" href="https://www.behance.net/melaniebaptist" target="_blank" rel="noopener">(CV)<small>Portafolio completo en Behance ↗</small></a>
         <figure class="portrait"><img src="https://i.pinimg.com/736x/6d/1a/25/6d1a25b5214fb41f13b1e4b0e65a0b89.jpg" alt="Retrato de Melanie Baptista rodeada de sus personajes ilustrados" loading="lazy" referrerpolicy="no-referrer"></figure>
       </div>
-      <p class="bio">Soy Melanie Baptista, diseñadora gráfica y directora creativa venezolana. Desde Caracas, junto a mi equipo, creo marcas para emprendimientos de comida, bebidas, belleza, moda y eventos. Ya tengo marcas viviendo en Venezuela, Ecuador y Estados Unidos, y la puerta abierta a cualquier país.</p>
+      <p class="bio">Soy Melanie Baptista, diseñadora gráfica y directora creativa venezolana. Desde Caracas, junto a mi equipo, creo marcas para emprendimientos de comida, bebidas, belleza, moda y eventos. Ya tengo marcas viviendo en Venezuela, Estados Unidos, Puerto Rico, España y Ecuador, y la puerta abierta a cualquier país.</p>
       <dl class="facts">
         <div><dt>Formación</dt><dd>Diseño Gráfico · trabajo de grado «Mingo» (2022)</dd></div>
         <div><dt>Experiencia</dt><dd>Creando marcas desde 2019, hoy con equipo propio</dd></div>
@@ -692,8 +697,10 @@ fieldset.f{border:0;margin:0;padding:0}
     </div>
     <div class="stamps" data-reveal role="list" aria-label="Países con marcas de Mel">
       <span class="stamp s1" role="listitem"><small>Caracas</small>Venezuela<i>desde 2019</i></span>
+      <span class="stamp s3" role="listitem"><small>Sicilian · Enchanted</small>EE. UU.<i>2025</i></span>
+      <span class="stamp s5" role="listitem"><small>Serena Floral</small>Puerto Rico<i>2026</i></span>
+      <span class="stamp s6" role="listitem"><small>Tablas Guay</small>España<i>2025</i></span>
       <span class="stamp s2" role="listitem"><small>House of José</small>Ecuador<i>2025</i></span>
-      <span class="stamp s3" role="listitem"><small>Virginia</small>EE. UU.<i>2025</i></span>
       <span class="stamp s4" role="listitem"><small>próximo destino</small>Tu país<i>✦</i></span>
     </div>
   </div>
@@ -875,7 +882,38 @@ const P = {
 
 /* ---------- Proyectos ---------- */
 const TAGS = { identidad:'Identidad', packaging:'Packaging', personaje:'Personajes', ilustracion:'Ilustración', papeleria:'Papelería', rediseno:'Rediseño' };
+const LOC = (slug, n) => `img/proyectos/${slug}/${String(n).padStart(2, '0')}.jpg`;
 const PROJECTS = [
+  { slug:'the-enchanted-spa', deck:true, name:'The Enchanted Spa', no:'26·11', year:2026, client:'Spa móvil infantil · Estados Unidos', accent:'#E44587',
+    services:['Identidad visual','Ilustración','Personaje','Packaging'], tags:['identidad','ilustracion','personaje','packaging','papeleria'],
+    line:'La magia llega a tu puerta',
+    desc:['Un spa móvil infantil que convierte cumpleaños y eventos en experiencias inolvidables, llevando magia, cuidado y belleza directamente a casa.','Creé un hada con turbante y corona como personaje de la marca, y la llevé a frascos, batas, toallas, bolsas, tarjetas, un libro para colorear y hasta la rotulación de la van. Rosas, amarillo mantequilla y celeste para un mundo donde cada niña se siente celebrada.'],
+    credits:'Dirección creativa e ilustración: Melanie Baptista · Diseño gráfico: Marcelo Freites',
+    cover:LOC('the-enchanted-spa',11), hero:LOC('the-enchanted-spa',5), imgs:[1,4,6,8,12,14,15,20,19].map(n=>LOC('the-enchanted-spa',n)) },
+  { slug:'viko-cookies', deck:true, name:'Viko Cookies', no:'26·10', year:2026, client:'Galletas de autor · Venezuela', accent:'#CC0639',
+    services:['Identidad visual','Personaje','Packaging','Tarjeta de fidelidad'], tags:['identidad','personaje','packaging','papeleria'],
+    line:'Ella es Moyi',
+    desc:['Viko Cookies le da un giro moderno al postre casero: galletas de autor y rolls de canela de sabores sorprendentes. El nombre nace de Victoria, su fundadora, y la marca entera se siente como el proyecto de una persona, no de una fábrica.','La protagonista es Moyi, una galleta rosada con chispas magenta, ojos grandes, mejillas con pecas y botas gruesas. Ella vive en la caja, en las bolsas y en la tarjeta de fidelidad.'],
+    credits:'Diseño gráfico, dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('viko-cookies',4), hero:LOC('viko-cookies',1), imgs:[3,5,8,9,10,11,12].map(n=>LOC('viko-cookies',n)) },
+  { slug:'fyp-constructora', deck:true, name:'F&P Constructora', no:'26·08', year:2026, client:'Metalmecánica y obras civiles · Venezuela', accent:'#F94101',
+    services:['Identidad visual','Sistema gráfico','Uniformes','Rotulación'], tags:['identidad','papeleria'],
+    line:'Del corte láser a la infraestructura pesada',
+    desc:['FYP Constructora es una empresa integral de metalmecánica, ingeniería y obras civiles con sede en El Junquito, Caracas: del detalle arquitectónico de alta precisión al movimiento de tierra y la infraestructura pesada.','Un símbolo construido como una estructura metálica, naranja de seguridad sobre grafito y un patrón que se lleva a uniformes, cascos, camiones, carnets y tarjetas.'],
+    credits:'Diseño gráfico y dirección creativa: Melanie Baptista',
+    cover:LOC('fyp-constructora',11), hero:LOC('fyp-constructora',1), imgs:[3,4,6,7,9,12,13,15,16].map(n=>LOC('fyp-constructora',n)) },
+  { slug:'ribs-bbq', deck:true, name:'Ribs BBQ', no:'26·08', year:2026, client:'Costillas y papas fritas · Venezuela', accent:'#D22622',
+    services:['Identidad visual','Personaje','Packaging','Ilustración'], tags:['identidad','personaje','packaging','ilustracion'],
+    line:'Just ribs & fries',
+    desc:['Ribs se inspira en las marcas clásicas estadounidenses y las eleva con un diseño impecable: costillas ahumadas que se deshacen en la boca, papas fritas y servicio rápido.','Un cerdito cocinero como personaje, rojo, azul marino y crema, y un sistema de empaques para papas, cajas, bolsas y menú. Hasta el cierre tiene su frase: «Huesos limpios. Nos vemos pronto».'],
+    credits:'Dirección creativa e ilustración: Melanie Baptista · Diseño gráfico: Marcelo Freites',
+    cover:LOC('ribs-bbq',9), hero:LOC('ribs-bbq',3), imgs:[4,6,7,11,13,16,18,21,20].map(n=>LOC('ribs-bbq',n)) },
+  { slug:'serena-floral', deck:true, name:'Serena Floral', no:'26·06', year:2026, client:'Floristería · Puerto Rico', accent:'#8C2940',
+    services:['Identidad visual','Tipografía intervenida','Packaging','Papelería'], tags:['identidad','packaging','papeleria','ilustracion'],
+    line:'Flores que respiran libres',
+    desc:['«La naturaleza no tiene reglas rígidas, y nuestras flores tampoco.» Serena Floral no hace arreglos tradicionales: cura pedacitos de naturaleza en ramos estilo pop-up, con colecciones efímeras y exclusivas.','Un logotipo con la S y la F intervenidas a mano, papel acuarelado, cintas, cajas, bolsas y tarjetas en vino, rosa y verde oliva. Let\'s make today bloom.'],
+    credits:'Dirección creativa e ilustración: Melanie Baptista',
+    cover:LOC('serena-floral',15), hero:LOC('serena-floral',10), imgs:[3,4,8,11,12,19,22,13].map(n=>LOC('serena-floral',n)) },
   { slug:'revive-cafe', name:'Revive Café', no:'26·06', year:2026, client:'Cafetería', accent:'#F3D34A',
     services:['Logotipo','Ilustración','Packaging'], tags:['identidad','ilustracion','packaging'],
     line:'Para despertar con estilo',
@@ -918,18 +956,11 @@ const PROJECTS = [
     line:'Del horno venezolano a Virginia',
     desc:['Rediseño de marca para la primera panadería venezolana en Virginia, Estados Unidos.','Cajas a rayas, etiquetas tipo ticket y el sello «handmade with love» para un producto que se hornea a mano.'],
     cover:PIN(P.sic2,736), hero:PIN(P.sic1), imgs:[PIN(P.sic2)] },
-  { slug:'house-of-jose', name:'House of José', no:'25·10', year:2025, client:'Podcast · Ecuador', accent:'#E77BD8',
-    services:['Identidad visual','Dirección de arte'], tags:['identidad'],
-    line:'Una casa virtual hecha podcast',
-    desc:['«House of José no es solo un podcast, es una casa virtual, una pasarela sonora donde convergen la nostalgia de los 2000s y la época rococó.»','Partí de un moodboard rico en referencias visuales para construir una identidad que brilla sin filtro.'],
-    cover:BE('aff4a7237145451.68fa6db95d3d9.jpg'), hero:BE('aff4a7237145451.68fa6db95d3d9.jpg'),
-    imgs:['d106b7237145451.68fa6db95c2eb.jpg','276985237145451.68fa6db95cbbe.jpg','89053b237145451.68fa6ed34aac5.jpg','6216f3237145451.68fa6ed34c6e5.jpg','e597a5237145451.68fa6ed349fc3.jpg','5475dd237145451.68fa6ed34861c.jpg'].map(f=>BE(f)) },
-  { slug:'smilo-cookies', name:'Smilo Cookies', no:'25·05', year:2025, client:'Galletas · bienestar', accent:'#F2C94C',
-    services:['Identidad visual','Packaging'], tags:['identidad','packaging'],
-    line:'Bienestar y alegría en cada mordida',
-    desc:['Identidad para una marca de galletas caseras que mezcla bienestar y alegría: logotipo con sonrisa, paleta pastel y empaques.'],
-    cover:BE('b025c1226806823.683524e3aac1a.png'), hero:BE('c09998226806823.683522c42d920.png'),
-    imgs:['11a486226806823.683522c42d039.png','b025c1226806823.683524e3aac1a.png','d6c4a9226806823.683524e3abfe9.png','c1f210226806823.683524e3a9725.png','7a1174226806823.683524e3ac764.png'].map(f=>BE(f)) },
+  { slug:'tablas-guay', deck:true, name:'Tablas Guay', no:'25·10', year:2025, client:'Tablas de picoteo · España', accent:'#6C372F',
+    services:['Identidad visual','Ilustración','Packaging','Papelería'], tags:['identidad','ilustracion','packaging','papeleria'],
+    line:'Cada tabla, una historia',
+    desc:['Tablas Guay es un proyecto artesanal en España que crea tablas de picoteo para eventos y ocasiones especiales, hechas a mano con ingredientes frescos y una presentación que convierte cada reunión en algo memorable.','El símbolo, dibujado a mano, es una tabla servida bajo un arco con dos copas: el momento de compartir. Lo llevé a bolsas, menús, etiquetas, stickers y redes en una paleta de vino, cacao y crema.'],
+    cover:LOC('tablas-guay',6), hero:LOC('tablas-guay',1), imgs:[3,4,7,8,9,12].map(n=>LOC('tablas-guay',n)) },
   { slug:'diez-de-diez', name:'10/10', no:'25·02', year:2025, client:'Hamburguesas', accent:'#2D4CE0',
     services:['Identidad visual','Ilustración'], tags:['identidad','ilustracion'],
     line:'¡Qué nota!',
@@ -941,23 +972,11 @@ const PROJECTS = [
     line:'Energía con mordida',
     desc:['Identidad y empaque para una marca fitness: logotipo con manzana, caja de envío y piezas de motivación.','Uno de los proyectos que más he disfrutado: empezó con un moodboard lleno de energía.'],
     cover:BE('022766212918449.673d7443a73e4.png'), hero:BE('78f214212918449.673d7443a9a6f.jpg'),
-    imgs:['33f5bd212918449.673d7443a78a2.jpg','4cb721212918449.673d7443a95b1.jpg','964219212918449.673d7443a8222.jpg','aead15212918449.673d7443a90dc.jpg'].map(f=>BE(f)) },
-  { slug:'sam-eventos', name:'Sam Eventos', no:'24·05', year:2024, client:'Agencia de festejos', accent:'#6C63FF',
-    services:['Identidad visual','Ilustración'], tags:['identidad','ilustracion'],
-    line:'Una fiesta en cada aplicación',
-    desc:['Identidad visual para una agencia de festejos: logotipo, patrones, globos, carpas y papelería.','Lila, rosa y azul para una marca que se siente como el inicio de una celebración.'],
-    cover:BE('82046a199151959.664cef3816d55.jpg'), hero:BE('0a4d0d199151959.664cef3810c27.jpg'),
-    imgs:['fa01a2199151959.664cef3812cbc.jpg','82046a199151959.664cef3816d55.jpg','f7d5c0199151959.664cef38162e3.jpg','d75136199151959.664cef381222e.jpg','df1ba9199151959.664cef3811723.jpg'].map(f=>BE(f)) },
-  { slug:'plain', name:'Plain', no:'23·10', year:2023, client:'Ropa', accent:'#A58C78',
-    services:['Identidad visual','Etiquetas'], tags:['identidad'],
-    line:'Lo simple, bien hecho',
-    desc:['Identidad visual para una marca de ropa de líneas limpias: monograma, etiquetas y aplicaciones en tonos tierra.','Un proyecto colaborativo: trabajar con otras personas siempre es un reto, y aquí salió algo muy especial.'],
-    cover:BE('35e8e1183273713.653c94c1ed684.jpg'), hero:BE('35e8e1183273713.653c94c1ed684.jpg'),
-    imgs:['064273183273713.653c9897dd33b.jpg','7fb39f183273713.653c973d271f4.jpg','70c653183273713.653c973d25189.jpg'].map(f=>BE(f)) }
+    imgs:['33f5bd212918449.673d7443a78a2.jpg','4cb721212918449.673d7443a95b1.jpg','964219212918449.673d7443a8222.jpg','aead15212918449.673d7443a90dc.jpg'].map(f=>BE(f)) }
 ];
 
 /* ---------- Cinta de marcas ---------- */
-const MARQUEE = ['Cheers Bakery','Revive Café','Hilitos y Puntaditas','Skin Co.','Woman Social Club','Lazzzy','House of José','Smilo','10/10','Sicilian Bakery','Viela','Moffes Bakery','YEI','Quality','Allegro Foods'];
+const MARQUEE = ['The Enchanted Spa','Ribs BBQ','Serena Floral','Viko Cookies','F&P','Tablas Guay','Cheers Bakery','Revive Café','Hilitos y Puntaditas','Skin Co.','Woman Social Club','Lazzzy','10/10','Sicilian Bakery','Viela'];
 $('#marquee').innerHTML = [...MARQUEE, ...MARQUEE].map(n => `<span>${n}</span>`).join('');
 
 /* ---------- Índice de proyectos + tarjetas ---------- */
@@ -1017,6 +1036,7 @@ function follow() {
 
 /* ---------- Galería a pantalla completa ---------- */
 const SLIDES = [
+  ['the-enchanted-spa', LOC('the-enchanted-spa', 5), 'The Enchanted Spa', 'Personaje y rotulación'],
   ['cheers-bakery', PIN(P.cheers1), 'Cheers Bakery', 'Packaging y personaje'],
   ['revive-cafe', PIN(P.rev1), 'Revive Café', 'Vasos y logotipo'],
   ['hilitos-y-puntaditas', PIN(P.hil2), 'Hilitos y Puntaditas', 'Producto y personaje'],
@@ -1024,7 +1044,7 @@ const SLIDES = [
   ['lazzzy', BE('21f7ea243343075.697ff9b31e570.png'), 'Lazzzy', 'Empaque'],
   ['skin-co', PIN(P.skin3), 'Skin Co.', 'Tarjeta de fidelidad'],
   ['viela', BE('9aac7d244864563.69a08e653dc13.jpg'), 'Viela', 'Campaña'],
-  ['house-of-jose', BE('aff4a7237145451.68fa6db95d3d9.jpg'), 'House of José', 'Identidad de podcast']
+  ['ribs-bbq', LOC('ribs-bbq', 18), 'Ribs BBQ', 'Packaging y personaje']
 ];
 const reel = $('#seleccion');
 reel.style.setProperty('--n', SLIDES.length);
@@ -1057,8 +1077,8 @@ $('#hola').innerHTML = [0, 1].map(k => HOLA.map(([w, l]) => `<span lang="${l}"${
 
 /* ---------- Marcas por año (lista con años, como Good Design Company) ---------- */
 const BRANDS = {
-  2026: [['Cheers Bakery','galletas'],['Moki Cookies','galletas NY'],['Ribs BBQ','comida rápida'],['Jay Jay','galletas'],['Lazzzy','comida'],['Viela','moda'],['The Enchanted Spa','spa'],['Skin Co.','spa facial'],['Woman Social Club','club'],['Revive Café','café'],['Hilitos y Puntaditas','bordados'],['Oki Chicha','bebida'],['Serena Floral','floristería'],['F&P','constructora'],['Zuē Studios','contenido']],
-  2025: [['Sicilian Bakery','panadería'],['House of José','podcast'],['Smilo Cookies','galletas'],['10/10','hamburguesas'],['Moffes Bakery','repostería'],['Quality','regalos'],['YEI','eventos'],['Allegro Foods','rediseño'],['Amor Dulc','rediseño'],['Dulce Mordida','repostería'],['Life Home Bienes','inmobiliaria'],['Tony Ceviche','comida'],['Cero Treinta','servicios']],
+  2026: [['Cheers Bakery','galletas'],['Moki Cookies','galletas NY'],['Ribs BBQ','comida rápida'],['Jay Jay','galletas'],['Lazzzy','comida'],['Viela','moda'],['The Enchanted Spa','spa'],['Skin Co.','spa facial'],['Woman Social Club','club'],['Revive Café','café'],['Hilitos y Puntaditas','bordados'],['Oki Chicha','bebida'],['Serena Floral','floristería'],['Viko Cookies','galletas'],['F&P','constructora'],['Zuē Studios','contenido']],
+  2025: [['Sicilian Bakery','panadería'],['Tablas Guay','tablas · España'],['House of José','podcast'],['Smilo Cookies','galletas'],['10/10','hamburguesas'],['Moffes Bakery','repostería'],['Quality','regalos'],['YEI','eventos'],['Allegro Foods','rediseño'],['Amor Dulc','rediseño'],['Dulce Mordida','repostería'],['Life Home Bienes','inmobiliaria'],['Tony Ceviche','comida'],['Cero Treinta','servicios']],
   2024: [['Lililu Cake Shop','rebranding'],['La Manzanita Fit','fitness'],['Sam Eventos','festejos'],['Emira Activewear','redes'],['Palla Caracas','redes']],
   2023: [['Plain','ropa'],['Gis Innovation','tecnología'],['Bellagio Music','música'],['Symbolic','ropa urbana'],['Dynamova','ropa deportiva'],['Giovanna V.','arquitecta']],
   2022: [['Samu','app'],['Magic Town','delivery'],['271 Motors','taller'],['Il Giardino','trattoria'],['Dulce Naturaleza','floristería'],['C3','arquitectura'],['Bocanas','steak house'],['Juvi','accesorios'],['Mingo','trabajo de grado']]
@@ -1074,9 +1094,15 @@ function spans(n) {
   while (i < n) { let pat = pats[k % pats.length]; if (pat.length > n - i) pat = fb[n - i]; out.push(...pat); i += pat.length; k++; }
   return out;
 }
+/* Presentaciones horizontales: se muestran completas, una ancha y luego en pares */
+function deckSpans(n) {
+  const out = [6]; let left = n - 1;
+  while (left > 0) { if (left === 1) { out.push(6); left = 0; } else { out.push(3, 3); left -= 2; } }
+  return out.slice(0, n);
+}
 function openCase(slug) {
   const i = PROJECTS.findIndex(p => p.slug === slug); if (i < 0) return;
-  const p = PROJECTS[i], next = PROJECTS[(i + 1) % PROJECTS.length], sp = spans(p.imgs.length);
+  const p = PROJECTS[i], next = PROJECTS[(i + 1) % PROJECTS.length], sp = p.deck ? deckSpans(p.imgs.length) : spans(p.imgs.length);
   if (caseEl.hidden) { savedY = window.scrollY; lastFocus = document.activeElement; document.documentElement.classList.add('lock'); caseEl.hidden = false; }
   caseEl.style.setProperty('--accent', p.accent);
   caseNo.textContent = `Nº ${p.no} · ${p.year}`;
@@ -1085,12 +1111,12 @@ function openCase(slug) {
     <header class="case-intro">
       <div><h2 class="case-title" id="case-title">${p.name}</h2><p class="case-line">${p.line}</p></div>
       <div>
-        <dl class="case-meta"><div><dt>Servicios</dt><dd>${p.services.join(' · ')}</dd></div><div><dt>Año</dt><dd>${p.year}</dd></div><div><dt>Cliente</dt><dd>${p.client}</dd></div></dl>
+        <dl class="case-meta"><div><dt>Servicios</dt><dd>${p.services.join(' · ')}</dd></div><div><dt>Año</dt><dd>${p.year}</dd></div><div><dt>Cliente</dt><dd>${p.client}</dd></div>${p.credits ? `<div class="cred"><dt>Créditos</dt><dd>${p.credits}</dd></div>` : ''}</dl>
         <div class="case-desc">${p.desc.map(d => `<p>${d}</p>`).join('')}</div>
         <a class="btn case-cta" href="#contacto" data-to-contact>¿Quieres una marca así? Trabajemos junt@s →</a>
       </div>
     </header>
-    <div class="mosaic">${p.imgs.map((src, j) => `<figure class="w${sp[j]}">${imgTag(src, `${p.name}, imagen ${j + 1}`)}</figure>`).join('')}</div>
+    <div class="mosaic${p.deck ? ' deck' : ''}">${p.imgs.map((src, j) => `<figure class="w${sp[j]}">${imgTag(src, `${p.name}, imagen ${j + 1}`)}</figure>`).join('')}</div>
     <a class="case-next" href="#proyecto/${next.slug}"><span>Siguiente proyecto</span><b>${next.name} →</b></a>`;
   caseEl.scrollTop = 0;
   $('.x', caseEl).focus({ preventScroll: true });
