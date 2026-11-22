@@ -25,7 +25,7 @@
    mel.gdesign — sitio web de Melanie Baptista
    Estructura inspirada en portafolios de Readymag (nav con línea rosa,
    nombre gigante, índice de proyectos, galería a pantalla completa,
-   bloque de contacto de color y tablero personal arrastrable),
+   bloque de contacto de color),
    más recursos de webs de diseño de Japón y China: Garden Eight,
    Good Design Company, nendo, Aaron Nieh Workshop, Bill Chien y Toby Ng.
    ===================================================================== */
@@ -115,7 +115,7 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 .stk{position:absolute;left:var(--x);top:var(--y);width:var(--w);pointer-events:auto;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;filter:drop-shadow(0 10px 14px rgba(34,26,30,.16));animation:bob var(--d,7s) ease-in-out infinite;animation-delay:var(--dl,0s);transition:scale .2s}
 .stk svg,.stk img{display:block;width:100%;height:auto;transform:rotate(var(--r,0deg));overflow:visible}
 .stk:hover{scale:1.05}
-.stk.drag,.obj.drag{cursor:grabbing;animation-play-state:paused;scale:1.08}
+.stk.drag{cursor:grabbing;animation-play-state:paused;scale:1.08}
 @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -10px}}
 .drag-hint{position:absolute;left:var(--x);top:var(--y);font:700 24px/1 var(--hand);color:var(--magenta);transform:rotate(-6deg);pointer-events:none}
 @media (max-width:700px){
@@ -260,23 +260,6 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 .stats b{display:block;font:700 clamp(34px,4.4vw,72px)/.95 var(--display);letter-spacing:-.036em}
 .stats span{font-size:13px;color:var(--ink-2)}
 @media (max-width:900px){.about-grid,.about-lower{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-
-/* ---------- Tablero personal arrastrable (como la referencia), borde festoneado ---------- */
-.board{--r:22px;position:relative;background:var(--pink);padding:calc(var(--r)*2 + 22px) var(--gutter) 46px;
-  -webkit-mask:radial-gradient(var(--r) at 50% var(--r),#000 98%,#0000) 50% 0/calc(var(--r)*2) calc(var(--r)*2) repeat-x,linear-gradient(#000 0 0) 0 var(--r)/100% 100% no-repeat;
-          mask:radial-gradient(var(--r) at 50% var(--r),#000 98%,#0000) 50% 0/calc(var(--r)*2) calc(var(--r)*2) repeat-x,linear-gradient(#000 0 0) 0 var(--r)/100% 100% no-repeat}
-.board-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 24px}
-.board-head h2{margin:0;font:700 clamp(46px,7vw,124px)/.84 var(--display);letter-spacing:-.039em;color:#fff}
-.board-head .hand{margin:10px 0 0;font:700 clamp(24px,2.4vw,32px)/1 var(--hand)}
-.board-area{position:relative;height:clamp(500px,46vw,660px);margin-top:12px}
-.obj{position:absolute;left:var(--x);top:var(--y);width:var(--w);cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;transition:scale .2s}
-.obj svg{display:block;width:100%;height:auto;transform:rotate(var(--r,0deg));filter:drop-shadow(0 10px 14px rgba(90,10,45,.28));overflow:visible}
-.obj .cap{position:absolute;left:50%;top:100%;translate:-50% 6px;width:max-content;max-width:210px;text-align:center;font:700 21px/1.02 var(--hand);color:var(--ink);pointer-events:none}
-@media (max-width:700px){
-  .board-area{height:820px}
-  .obj{left:var(--mx);top:var(--my);width:var(--mw)}
-  .obj .cap{font-size:18px;max-width:150px}
-}
 
 /* ---------- Muro de marcas (lista por años, como Good Design Company) ---------- */
 .brands{position:relative;padding:clamp(60px,8vw,120px) var(--gutter);border-top:1.5px solid var(--ink)}
@@ -632,48 +615,6 @@ fieldset.f{border:0;margin:0;padding:0}
     <li><b>565 k</b><span>visualizaciones al mes en Pinterest</span></li>
     <li><b>0</b><span>fronteras: marcas de cualquier país, sin barreras de idioma ni de cultura</span></li>
   </ul>
-</section>
-
-<!-- ============================ TABLERO PERSONAL ============================ -->
-<section id="tablero" class="board" aria-labelledby="board-title">
-  <div class="board-head">
-    <h2 id="board-title">mi tablero<br>personal</h2>
-    <p class="hand">(arrastra para jugar)</p>
-  </div>
-  <div class="board-area" id="board">
-    <div class="obj" tabindex="0" role="img" aria-label="iPad con lápiz: mi primer iPad, pagado con mi propio trabajo (arrastrable)" style="--x:2%;--y:3%;--w:clamp(180px,17vw,250px);--r:-6deg;--mx:2%;--my:1%;--mw:160px">
-      <svg viewBox="0 0 200 150"><rect x="6" y="6" width="176" height="132" rx="14" fill="#221A1E"/><rect x="16" y="16" width="156" height="112" rx="6" fill="#FFE8F2"/><path d="M60 94c-14-10-22-18-22-28 0-8 6-14 13-14 5 0 8 3 9 6 1-3 4-6 9-6 7 0 13 6 13 14 0 10-8 18-22 28z" fill="#FF4FA3" stroke="#221A1E" stroke-width="2.5"/><path d="M100 54c12-6 26 4 38-2M100 70c10-4 20 3 30 0M100 86c8-3 16 2 24 0" fill="none" stroke="#221A1E" stroke-width="2.5" stroke-linecap="round"/><g transform="rotate(-38 160 112)"><rect x="110" y="106" width="96" height="10" rx="5" fill="#fff" stroke="#221A1E" stroke-width="2.5"/><path d="M206 106l12 5-12 5z" fill="#221A1E"/></g></svg>
-      <span class="cap">mi primer iPad, pagado con mi propio trabajo</span>
-    </div>
-    <div class="obj" tabindex="0" role="img" aria-label="Destello: la IA, mi mejor amiga para los mockups (arrastrable)" style="--x:27%;--y:6%;--w:clamp(90px,8vw,120px);--mx:68%;--my:3%;--mw:84px">
-      <svg viewBox="0 0 120 120"><path d="M60 6c4 30 24 50 54 54-30 4-50 24-54 54-4-30-24-50-54-54 30-4 50-24 54-54z" fill="#FFE27A" stroke="#221A1E" stroke-width="3" stroke-linejoin="round"/><path d="M96 10c1.5 8 6 12.5 14 14-8 1.5-12.5 6-14 14-1.5-8-6-12.5-14-14 8-1.5 12.5-6 14-14z" fill="#fff" stroke="#221A1E" stroke-width="2.5" stroke-linejoin="round"/></svg>
-      <span class="cap">la IA, mi mejor amiga para los mockups</span>
-    </div>
-    <div class="obj" tabindex="0" role="img" aria-label="Aro de luz: mi primera luz contra mi última luz (arrastrable)" style="--x:46%;--y:1%;--w:clamp(110px,10vw,140px);--mx:62%;--my:25%;--mw:96px">
-      <svg viewBox="0 0 140 190"><circle cx="70" cy="62" r="50" fill="none" stroke="#221A1E" stroke-width="16"/><circle cx="70" cy="62" r="50" fill="none" stroke="#FFF7D6" stroke-width="10"/><rect x="56" y="38" width="28" height="48" rx="5" fill="#FFE8F2" stroke="#221A1E" stroke-width="2.5"/><path d="M70 112v58M44 182h52M70 170l-22 12M70 170l22 12" stroke="#221A1E" stroke-width="4.5" stroke-linecap="round"/></svg>
-      <span class="cap">mi primera luz vs. mi última luz</span>
-    </div>
-    <div class="obj" tabindex="0" role="img" aria-label="Muestras de color de la paleta (arrastrable)" style="--x:68%;--y:5%;--w:clamp(150px,13vw,190px);--mx:4%;--my:27%;--mw:130px">
-      <svg viewBox="0 0 180 130"><g stroke="#221A1E" stroke-width="2.5" stroke-linejoin="round"><g transform="rotate(-18 36 118)"><rect x="18" y="14" width="44" height="100" rx="6" fill="#fff"/><rect x="18" y="14" width="44" height="64" rx="6" fill="#FF4FA3"/></g><g transform="rotate(-5 70 118)"><rect x="52" y="10" width="44" height="100" rx="6" fill="#fff"/><rect x="52" y="10" width="44" height="64" rx="6" fill="#E3263C"/></g><g transform="rotate(9 104 118)"><rect x="86" y="10" width="44" height="100" rx="6" fill="#fff"/><rect x="86" y="10" width="44" height="64" rx="6" fill="#FFE27A"/></g><g transform="rotate(22 138 118)"><rect x="118" y="14" width="44" height="100" rx="6" fill="#fff"/><rect x="118" y="14" width="44" height="64" rx="6" fill="#2DB3A6"/></g></g></svg>
-      <span class="cap">rosa siempre, pero con carácter</span>
-    </div>
-    <div class="obj" tabindex="0" role="img" aria-label="Entrada de concierto: conciertos que recargan la creatividad (arrastrable)" style="--x:3%;--y:60%;--w:clamp(170px,15vw,220px);--r:-8deg;--mx:2%;--my:52%;--mw:150px">
-      <svg viewBox="0 0 200 100"><path d="M12 10h176v26a14 14 0 0 0 0 28v26H12V64a14 14 0 0 0 0-28z" fill="#FFE27A" stroke="#221A1E" stroke-width="2.5" stroke-linejoin="round"/><path d="M146 16v68" stroke="#221A1E" stroke-width="2" stroke-dasharray="5 5"/><text x="78" y="48" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" font-size="21" fill="#221A1E">CONCIERTO</text><text x="78" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="10.5" letter-spacing="2" fill="#221A1E">ADMIT ONE · PISTA</text><text x="167" y="54" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#221A1E" transform="rotate(-90 167 54)">Nº 0027</text></svg>
-      <span class="cap">conciertos que recargan la creatividad</span>
-    </div>
-    <div class="obj" tabindex="0" role="img" aria-label="Tableta gráfica: la tableta con la que empezó todo (arrastrable)" style="--x:27%;--y:54%;--w:clamp(180px,17vw,240px);--r:5deg;--mx:46%;--my:55%;--mw:150px">
-      <svg viewBox="0 0 200 130"><rect x="6" y="10" width="188" height="112" rx="14" fill="#2B2B2E" stroke="#221A1E" stroke-width="2.5"/><rect x="44" y="24" width="136" height="84" rx="4" fill="#3A3A40" stroke="#5C5C66" stroke-width="2" stroke-dasharray="4 4"/><g fill="#5C5C66"><rect x="16" y="28" width="16" height="10" rx="3"/><rect x="16" y="44" width="16" height="10" rx="3"/><rect x="16" y="60" width="16" height="10" rx="3"/><rect x="16" y="76" width="16" height="10" rx="3"/></g><g transform="rotate(28 120 60)"><rect x="70" y="56" width="110" height="9" rx="4.5" fill="#1A1A1D" stroke="#5C5C66" stroke-width="1.5"/><path d="M180 56l10 4.5-10 4.5z" fill="#1A1A1D"/></g></svg>
-      <span class="cap">la tableta con la que empezó todo</span>
-    </div>
-    <div class="obj" tabindex="0" role="img" aria-label="Nota adhesiva con pendientes (arrastrable)" style="--x:55%;--y:50%;--w:clamp(140px,12vw,170px);--r:4deg;--mx:4%;--my:77%;--mw:132px">
-      <svg viewBox="0 0 160 160"><path d="M8 10h144v116l-26 26H8z" fill="#FFF3A6" stroke="#221A1E" stroke-width="2.5" stroke-linejoin="round"/><path d="M152 126h-26v26" fill="#F2DE6B" stroke="#221A1E" stroke-width="2.5" stroke-linejoin="round"/><text font-family="Caveat, cursive" font-weight="700" font-size="17" fill="#221A1E"><tspan x="18" y="38">pendientes:</tspan><tspan x="18" y="64">✓ carpetas de marca</tspan><tspan x="18" y="90">✓ reunión cliente</tspan><tspan x="18" y="116">♡ mockups con IA</tspan></text></svg>
-      <span class="cap">tachar pendientes = felicidad</span>
-    </div>
-    <div class="obj" tabindex="0" role="img" aria-label="Cupcake: mis pausas son para experimentar en la cocina (arrastrable)" style="--x:81%;--y:50%;--w:clamp(100px,9vw,130px);--r:8deg;--mx:64%;--my:77%;--mw:92px">
-      <svg viewBox="0 0 130 150"><g stroke="#221A1E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M22 78h86l-12 62H34z" fill="#FF8DC0"/><path d="M42 80l4 58M58 80l1 58M74 80l-1 58M90 80l-4 58" fill="none"/><path d="M16 80c-8-14 6-26 16-22 0-16 18-24 30-14 8-12 30-8 30 8 14-2 26 12 18 28z" fill="#FFF7EF"/><circle cx="66" cy="32" r="9" fill="#E3263C"/><path d="M66 23c2-8 8-12 14-12" fill="none"/></g></svg>
-      <span class="cap">mis pausas: experimentar en la cocina</span>
-    </div>
-  </div>
 </section>
 
 <!-- ============================ MARCAS ============================ -->
@@ -1136,7 +1077,7 @@ function route() { const m = location.hash.match(/^#proyecto\/([\w-]+)$/); if (m
 window.addEventListener('hashchange', route);
 route();
 
-/* ---------- Arrastrables (stickers del inicio y tablero personal) ---------- */
+/* ---------- Arrastrables (stickers del inicio) ---------- */
 let zTop = 10;
 function draggable(el, area) {
   el.addEventListener('pointerdown', e => {
@@ -1163,8 +1104,6 @@ function draggable(el, area) {
 const stickers = $('.stickers');
 $$('.stk', stickers).forEach(el => draggable(el, stickers));
 stickers.addEventListener('pointerdown', () => { const h = $('.drag-hint'); if (h) h.remove(); }, { once: true });
-const board = $('#board');
-$$('.obj', board).forEach(el => draggable(el, board));
 
 /* ---------- Reloj de Caracas (como el reloj local de Bill Chien) ---------- */
 const fmt = new Intl.DateTimeFormat('es-VE', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/Caracas' });
