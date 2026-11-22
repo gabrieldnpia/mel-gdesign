@@ -566,7 +566,7 @@ fieldset.f{border:0;margin:0;padding:0}
       <blockquote>“No me imaginaba jamás que mi pasión por crear mascot brands escalaría tanto.”<cite>— Mel</cite></blockquote>
     </div>
   </div>
-  <div class="strip" id="strip" tabindex="0" aria-label="Galería de personajes e ilustraciones, desplázate en horizontal"></div>
+  <div class="strip" id="strip" tabindex="0" aria-label="Galería de mascotas de marca, desplázate en horizontal"></div>
 </section>
 
 <!-- ============================ PROCESO ============================ -->
@@ -839,23 +839,10 @@ const TITLE = document.title;
 const PIN = (h, s = 1200) => `https://i.pinimg.com/${s}x/${h}.jpg`;
 const BE = (f, s = '1400') => `https://mir-s3-cdn-cf.behance.net/project_modules/${s}/${f}`;
 const P = {
-  cheers1:'7d/9e/78/7d9e78f14834c2ec9023500e62bd9aab', cheers2:'e1/0e/62/e10e62e11957ba2b6c9704525ccfd588',
-  cheers3:'27/8a/23/278a23760f15299da7cc384708cc36e5', cheers4:'e8/2d/71/e82d71d5f3c2c52e6119187d27c5a758',
-  cheers5:'5c/79/4b/5c794bc04eb83081ff40b85de0f396fb', cheers6:'e4/a3/99/e4a399a4127be3db8985880d5aeaea2b',
-  skin1:'63/48/5a/63485a28d1a5906d9749bc3ee01bae5f', skin2:'27/71/d8/2771d8c57241e143ecd8c9aaa0204c66',
-  skin3:'c4/3d/27/c43d27263d095b251fd48e1a96641d0f', skin4:'6f/a6/d5/6fa6d524caf63214024f62256fb4ec00',
-  skin5:'cd/10/62/cd1062b567ec07f2a59f5109a511046e', skin6:'10/d0/3f/10d03fcf4dbb93851f2df080e58e93f8',
   sic1:'37/4a/03/374a0309fd47935bc7fa1cf914a539b3', sic2:'7a/ba/53/7aba531b19dd2007229a4702a280d013',
-  wsc1:'05/3a/1f/053a1fc69551864d14cd4680c23ca500', wsc2:'d9/e1/52/d9e152258225a9391c2142ca6d51434a',
-  wsc3:'da/fb/f2/dafbf207c5078ca9e287d06d539b866f', wsc4:'7e/82/d4/7e82d478231420cbb0f405f38b0268cd',
   hil1:'d2/40/67/d2406767675c634a83ceaccbbf045f1c', hil2:'c9/36/0b/c9360b9d7d149b571c97dd483782128d',
   hil3:'de/5a/b0/de5ab068d94b7e3d6d65939426224ff3', hil4:'d3/77/53/d37753cfbbf7e301157dd0f232798d96',
-  hil5:'5f/c6/7e/5fc67eb53d466c9573d441a47f430658',
-  rev1:'ec/0b/02/ec0b0244b29ac7affd29c80c12909193', rev2:'69/2f/97/692f97512e476dfcdefe6bb3566fdc4b',
-  rev3:'db/fd/ed/dbfded410195599181ae5298430bc631', rev4:'b3/1a/7d/b31a7d769d85b477b74c7e3973d603a5',
-  rev5:'b7/88/40/b7884017588c276c0db0eee598cddd0f',
-  ilus1:'a7/a8/f2/a7a8f2ca228dd1ba8fd5a663bebaf09e', ilus2:'e4/61/b4/e461b4096c3dad6d4aac46c1d692048d',
-  ilus3:'8c/22/0e/8c220ef5f4d8235b3910d29a22e356d0', open:'7d/a5/d4/7da5d4d6a064ebe2eb8824a9c14c93b0'
+  hil5:'5f/c6/7e/5fc67eb53d466c9573d441a47f430658'
 };
 
 /* ---------- Proyectos ---------- */
@@ -1059,13 +1046,24 @@ reel.addEventListener('touchend', e => {
 goSlide(0);
 
 /* ---------- Personajes ---------- */
+/* Mascotas de la carpeta «Mascotas» (Mesa de trabajo 1 a 14): [número, texto bajo la tarjeta, descripción, giro] */
 const CHARS = [
-  [PIN(P.cheers3, 736), 'Cheers Bakery', -3], [PIN(P.hil1, 736), 'Hilitos y Puntaditas', 2],
-  [PIN(P.ilus1, 736), 'Ilustración de marca', -1.5], [PIN(P.rev5, 736), 'Revive Café', 2.5],
-  [BE('b025c1226806823.683524e3aac1a.png'), 'Smilo Cookies', -2], [PIN(P.ilus3, 736), 'Personajes propios', 1.5],
-  [PIN(P.ilus2, 736), 'Día del diseñador', -2.5], [PIN(P.open, 736), 'Open to projects', 2]
+  [1, 'Moyi · Viko Cookies', 'Moyi, la galleta rosada con botas de Viko Cookies', -3],
+  [2, 'Galleta pastelera', 'Galleta de chocolate con gorro de chef y delantal rosado', 2],
+  [3, 'Gatito con su bebida', 'Gatito azul tomando su bebida con pajilla', -1.5],
+  [4, 'Jay Jay Bakery', 'Galleta sonriente de Jay Jay Bakery con las manos en las mejillas', 2.5],
+  [5, 'Hilitos y Puntaditas', 'Corazón rosado con antenas, personaje de Hilitos y Puntaditas', -2],
+  [6, 'Taza con ojitos', 'Taza de café con ojitos y un chorro de café', 1.5],
+  [7, 'Cajita', 'Cajita roja con ojitos', -2.5],
+  [8, 'Ribs BBQ', 'Cerdito con gorra, mascota de Ribs BBQ', 2],
+  [9, 'Chico con audífonos', 'Chico dibujado en línea, con audífonos, caminando', -3],
+  [10, 'Osita galleta', 'Osita rosada con capucha de galleta', 2],
+  [11, 'The Enchanted Spa', 'Hada con turbante y corona de The Enchanted Spa', -1.5],
+  [12, 'Galletita rosa', 'Galletita rosa caminando', 2.5],
+  [13, 'Niña de suéter', 'Niña de colita con suéter celeste', -2],
+  [14, 'Cubito saludando', 'Cubito dibujado en línea saludando', 1.5]
 ];
-$('#strip').innerHTML = CHARS.map(([src, cap, r]) => `<figure class="char" style="--r:${r}deg">${imgTag(src, cap)}<figcaption>${cap}</figcaption></figure>`).join('');
+$('#strip').innerHTML = CHARS.map(([n, cap, alt, r]) => `<figure class="char" style="--r:${r}deg">${imgTag(`img/mascotas/mascota-${String(n).padStart(2, '0')}.jpg`, alt)}<figcaption>${cap}</figcaption></figure>`).join('');
 
 /* ---------- Sin fronteras: "hola" en distintos idiomas ---------- */
 const HOLA = [['Hola','es'],['Hello','en'],['Olá','pt'],['Bonjour','fr'],['Ciao','it'],['Hallo','de'],['こんにちは','ja'],['你好','zh'],['안녕하세요','ko'],['Merhaba','tr'],['Привет','ru'],['مرحبا','ar'],['नमस्ते','hi'],['Xin chào','vi'],['Γειά σου','el'],['Hej','sv']];
