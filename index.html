@@ -473,7 +473,7 @@ fieldset.f{border:0;margin:0;padding:0}
 <!-- ============================ INICIO ============================ -->
 <section id="inicio" class="hero">
   <h1 class="wordmark" aria-label="mel.gdesign">
-    <span class="wm-a">mel.<img class="seal" src="img/inicio/sello-melanie.png" alt="" width="300" height="297"></span>
+    <span class="wm-a">mel.<img class="seal" src="img/inicio/sello-melanie.png" alt="" width="477" height="472"></span>
     <span class="wm-b">gdesign</span>
   </h1>
 
@@ -696,7 +696,7 @@ fieldset.f{border:0;margin:0;padding:0}
     <p>Una guía nacida de mi flujo de trabajo real para aprender a pensar como directora de arte, más un asistente en Gemini entrenado con mi metodología: le das una idea básica y te devuelve un prompt técnico para crear mockups y escenas.</p>
     <a class="btn" href="https://subscribepage.io/wBw5qk" target="_blank" rel="noopener">Quiero la guía ↗</a>
   </div>
-  <figure class="ebook-img" data-reveal><img src="https://i.pinimg.com/736x/86/a8/b8/86a8b80b38a5b9310e905c214dc3e440.jpg" alt="Comparación entre una marca en vectores y la misma marca en un mockup creado con IA" loading="lazy" referrerpolicy="no-referrer"></figure>
+  <figure class="ebook-img" data-reveal><img src="https://i.pinimg.com/originals/86/a8/b8/86a8b80b38a5b9310e905c214dc3e440.jpg" alt="Comparación entre una marca en vectores y la misma marca en un mockup creado con IA" loading="lazy" referrerpolicy="no-referrer"></figure>
 </section>
 
 <!-- ============================ CONTACTO ============================ -->
@@ -940,10 +940,12 @@ $('#marquee').innerHTML = [...MARQUEE, ...MARQUEE].map(n => `<span>${n}</span>`)
 /* ---------- Índice de proyectos + tarjetas ---------- */
 const lower = s => s.charAt(0).toLowerCase() + s.slice(1);
 const svc = p => { const s = p.services.map((x, i) => i ? lower(x) : x); return s.length > 1 ? s.slice(0, -1).join(', ') + ' y ' + s.at(-1) : s[0]; };
-const imgTag = (src, alt, cls = '') => `<img${cls ? ` class="${cls}"` : ''} src="${src}" alt="${alt}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
+/* Las páginas de las presentaciones existen en 1600 px y en 2880 px (@2x): el navegador elige la que necesita la pantalla */
+const hiRes = (src, sizes) => src.startsWith('img/proyectos/') && sizes ? ` srcset="${src} 1600w, ${src.replace(/\.jpg$/, '@2x.jpg')} 2880w" sizes="${sizes}"` : '';
+const imgTag = (src, alt, cls = '', sizes = '') => `<img${cls ? ` class="${cls}"` : ''} src="${src}"${hiRes(src, sizes)} alt="${alt}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
 const indexEl = $('#index'), cardsEl = $('#cards');
 indexEl.innerHTML = PROJECTS.map(p => `<li data-tags="${p.tags.join(' ')}"><a class="row" href="#proyecto/${p.slug}" data-img="${p.cover}"><span class="no">Nº ${p.no}</span><span class="name">${p.name}</span><span class="svc">${svc(p)}</span><span class="yr">${p.year}</span><span class="go" aria-hidden="true">→</span></a></li>`).join('');
-cardsEl.innerHTML = PROJECTS.map(p => `<a class="card" href="#proyecto/${p.slug}" data-tags="${p.tags.join(' ')}"><div class="card-img">${imgTag(p.cover, `${p.name}: ${p.line}`)}</div><div class="card-meta"><span>Nº ${p.no}</span><span>${p.year}</span></div><h3>${p.name}</h3><p>${p.line}</p><span class="more">Ver proyecto →</span></a>`).join('');
+cardsEl.innerHTML = PROJECTS.map(p => `<a class="card" href="#proyecto/${p.slug}" data-tags="${p.tags.join(' ')}"><div class="card-img">${imgTag(p.cover, `${p.name}: ${p.line}`, '', '(max-width:560px) 100vw, (max-width:1000px) 50vw, 33vw')}</div><div class="card-meta"><span>Nº ${p.no}</span><span>${p.year}</span></div><h3>${p.name}</h3><p>${p.line}</p><span class="more">Ver proyecto →</span></a>`).join('');
 
 /* Filtros (como el índice filtrable de Aaron Nieh Workshop) */
 const chipsEl = $('#chips'); let filter = 'todos';
@@ -1006,7 +1008,7 @@ const SLIDES = [
   ['hilitos-y-puntaditas', LOC('hilitos-y-puntaditas', 6), 'Hilitos y Puntaditas', 'Personaje bordado']
 ];
 const reel = $('#seleccion');
-$('#slides').innerHTML = SLIDES.map(([slug, src, name, what], i) => `<figure class="slide${i ? '' : ' on'}" style="--bg:url('${src}')">${imgTag(src, `${name}: ${what}`)}<figcaption><div><b>${name}</b><small>${what}</small></div><a href="#proyecto/${slug}">Ver proyecto →</a></figcaption></figure>`).join('');
+$('#slides').innerHTML = SLIDES.map(([slug, src, name, what], i) => `<figure class="slide${i ? '' : ' on'}" style="--bg:url('${src}')">${imgTag(src, `${name}: ${what}`, '', '100vw')}<figcaption><div><b>${name}</b><small>${what}</small></div><a href="#proyecto/${slug}">Ver proyecto →</a></figcaption></figure>`).join('');
 const slides = $$('.slide', reel), reelCount = $('#reel-count'), reelBar = $('.reel-bar i');
 /* Se pasa con botones (y deslizando en el celular); la página sigue su scroll normal */
 let cur = 0;
@@ -1088,7 +1090,7 @@ function openCase(slug) {
   caseEl.style.setProperty('--accent', p.accent);
   caseNo.textContent = `Nº ${p.no} · ${p.year}`;
   caseBody.innerHTML = `
-    <figure class="case-hero"><img src="${p.hero}" alt="${p.name}, imagen principal" referrerpolicy="no-referrer"></figure>
+    <figure class="case-hero"><img src="${p.hero}"${hiRes(p.hero, '100vw')} alt="${p.name}, imagen principal" referrerpolicy="no-referrer"></figure>
     <header class="case-intro">
       <div><h2 class="case-title" id="case-title">${p.name}</h2><p class="case-line">${p.line}</p></div>
       <div>
@@ -1097,7 +1099,7 @@ function openCase(slug) {
         <a class="btn case-cta" href="#contacto" data-to-contact>¿Quieres una marca así? Trabajemos junt@s →</a>
       </div>
     </header>
-    <div class="mosaic${p.deck ? ' deck' : ''}">${p.imgs.map((src, j) => `<figure class="w${sp[j]}">${imgTag(src, `${p.name}, imagen ${j + 1}`).replace('<img', '<img onerror="this.parentNode.remove()"')}</figure>`).join('')}</div>
+    <div class="mosaic${p.deck ? ' deck' : ''}">${p.imgs.map((src, j) => `<figure class="w${sp[j]}">${imgTag(src, `${p.name}, imagen ${j + 1}`, '', sp[j] === 'c' ? '(max-width:700px) 100vw, 67vw' : sp[j] === 6 ? '100vw' : '(max-width:700px) 100vw, 50vw').replace('<img', '<img onerror="this.parentNode.remove()"')}</figure>`).join('')}</div>
     <a class="case-next" href="#proyecto/${next.slug}"><span>Siguiente proyecto</span><b>${next.name} →</b></a>`;
   caseEl.scrollTop = 0;
   $('.x', caseEl).focus({ preventScroll: true });
