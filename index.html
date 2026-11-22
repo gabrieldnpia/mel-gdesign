@@ -195,7 +195,7 @@ section>.rail{left:calc(var(--gutter)*.28);top:clamp(70px,8vw,120px);transform:r
 .reel-btn.prev:hover{background:#fff;color:var(--ink)}
 .reel-btn:focus-visible{outline:3px solid #fff;outline-offset:4px}
 .reel-bar i{transition:transform .5s var(--ease)}
-.slide{position:absolute;inset:0;margin:0;opacity:0;transform:scale(1.06);transition:opacity .8s ease,transform 1.6s var(--ease);pointer-events:none}
+.slide{position:absolute;inset:0;margin:0;overflow:hidden;opacity:0;transform:scale(1.06);transition:opacity .8s ease,transform 1.6s var(--ease);pointer-events:none}
 .slide.on{opacity:1;transform:scale(1);pointer-events:auto}
 .slide img{width:100%;height:100%;object-fit:cover}
 .slide::after{content:"";position:absolute;inset:auto 0 0;height:50%;background:linear-gradient(transparent,rgba(20,10,15,.6));pointer-events:none}
@@ -387,7 +387,7 @@ fieldset.f{border:0;margin:0;padding:0}
 .case-no{font-size:12.5px;letter-spacing:.12em;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .case-bar .x{width:40px;height:40px;display:grid;place-items:center;padding:0;border:1.5px solid var(--ink);border-radius:50%;background:none;cursor:pointer;font-size:16px}
 .case-bar .x:hover{background:var(--ink);color:var(--paper)}
-.case-hero{margin:0;height:min(80svh,58vw);background:var(--accent,var(--pink-2))}
+.case-hero{margin:0;overflow:hidden;height:min(80svh,58vw);background:var(--accent,var(--pink-2))}
 .case-hero img{width:100%;height:100%;object-fit:cover}
 .case-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(22px,4vw,70px);padding:clamp(30px,5vw,76px) var(--gutter)}
 .case-title{margin:0;font:700 clamp(50px,8vw,146px)/.84 var(--display);letter-spacing:-.039em}
@@ -427,6 +427,10 @@ fieldset.f{border:0;margin:0;padding:0}
 .edit-bar span{opacity:.85}
 .edit-bar button,.edit-bar a{border:1.5px solid #fff;border-radius:999px;padding:7px 14px;background:transparent;color:#fff;font:600 13px/1 var(--sans);text-decoration:none;cursor:pointer}
 .edit-bar button[data-a=copy]{background:#F484B7;border-color:#F484B7;color:var(--ink)}
+.edit-bar .zoom-ctl{display:inline-flex;align-items:center;gap:6px;opacity:1}
+.edit-bar .zoom-ctl button{width:34px;height:34px;padding:0;font-size:18px}
+.edit-bar output{min-width:48px;text-align:center;font:600 13px/1 var(--sans);font-variant-numeric:tabular-nums}
+.editing .picked{outline:3px solid #F484B7;outline-offset:-3px}
 
 /* ---------- Aparición al hacer scroll ---------- */
 .js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
@@ -1224,7 +1228,15 @@ const FRAME_KEY = 'mel-encuadres';
 const EDIT = new URLSearchParams(location.search).has('editar');
 let edits = {};
 if (EDIT) { try { edits = JSON.parse(localStorage.getItem(FRAME_KEY) || '{}') || {}; } catch (e) {} }
-const frameImg = img => { const p = edits[img.getAttribute('src')] || ENCUADRES[img.getAttribute('src')]; img.style.objectPosition = p || ''; };
+/* Cada ajuste es "x% y%" o "x% y% zoom" (zoom 1 = tamaño normal, 0.5 = alejada, 3 = muy cerca) */
+const parseFrame = v => { const [x = 50, y = 50, z = 1] = String(v || '50% 50%').split(' ').map(parseFloat); return { x, y, z }; };
+const frameImg = img => {
+  const v = edits[img.getAttribute('src')] || ENCUADRES[img.getAttribute('src')];
+  if (!v) { img.style.objectPosition = img.style.transformOrigin = img.style.scale = ''; return; }
+  const f = parseFrame(v);
+  img.style.objectPosition = img.style.transformOrigin = `${f.x}% ${f.y}%`;
+  img.style.scale = f.z === 1 ? '' : String(f.z);
+};
 const frameAll = (root = document) => root.querySelectorAll('img').forEach(frameImg);
 frameAll();
 new MutationObserver(ms => ms.forEach(m => {
@@ -1236,19 +1248,34 @@ if (EDIT) {
   document.documentElement.classList.add('editing');
   const bar = document.createElement('div');
   bar.className = 'edit-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Modo edición de fotos');
-  bar.innerHTML = `<b>Modo edición</b><span>Arrastra una foto para centrarla · doble clic la devuelve al centro · para abrir un proyecto pulsa su nombre</span><button type="button" data-a="copy">Copiar ajustes</button><button type="button" data-a="reset">Borrar todo</button><a href="${location.pathname}${location.hash}">Salir</a>`;
+  bar.innerHTML = `<b>Modo edición</b><span>Toca una foto y arrástrala para moverla · − / + (o pellizca el trackpad) para alejar o acercar · doble clic la deja como al inicio · para abrir un proyecto pulsa su nombre</span><span class="zoom-ctl"><button type="button" data-a="out" aria-label="Alejar la foto">−</button><output id="zoom-val">100 %</output><button type="button" data-a="in" aria-label="Acercar la foto">+</button></span><button type="button" data-a="copy">Copiar ajustes</button><button type="button" data-a="reset">Borrar todo</button><a href="${location.pathname}${location.hash}">Salir</a>`;
   document.body.append(bar);
   const save = () => { try { localStorage.setItem(FRAME_KEY, JSON.stringify(edits)); } catch (e) {} };
   const SEL = '.slide,.card-img,.case-hero,.mosaic figure,.char,.portrait,.ebook-img';
   const pick = t => { if (t.closest('a:not(.card):not(.row), button, figcaption, .edit-bar')) return null; const box = t.closest(SEL); return box ? box.querySelector('img') : null; };
+  const fmt = (x, y, z) => z === 1 ? `${x}% ${y}%` : `${x}% ${y}% ${z}`;
+  const frameOf = img => parseFrame(edits[img.getAttribute('src')] || ENCUADRES[img.getAttribute('src')]);
+  const zoomVal = $('#zoom-val', bar);
+  let sel = null;
+  const select = img => { if (sel) sel.classList.remove('picked'); sel = img; img.classList.add('picked'); zoomVal.textContent = `${Math.round(frameOf(img).z * 100)} %`; };
+  /* Acercar / alejar (los personajes tienen marco, así que solo se mueven) */
+  let zt = 0;
+  function zoomImg(img, factor) {
+    if (img.closest('.char')) { toast('Esta foto solo se puede mover'); return; }
+    const f = frameOf(img), z = Math.round(Math.min(3, Math.max(.5, f.z * factor)) * 100) / 100;
+    edits[img.getAttribute('src')] = fmt(f.x, f.y, z); frameAll(); select(img);
+    clearTimeout(zt); zt = setTimeout(save, 250);
+  }
   let drag = null, moved = false;
   document.addEventListener('pointerdown', e => {
     if (e.button) return;
     const img = pick(e.target); if (!img || !img.naturalWidth) return;
-    e.preventDefault();
-    const r = img.getBoundingClientRect(), s = Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight);
-    const [px, py] = (getComputedStyle(img).objectPosition || '50% 50%').split(' ').map(parseFloat);
-    drag = { img, x: e.clientX, y: e.clientY, px, py, ox: img.naturalWidth * s - r.width, oy: img.naturalHeight * s - r.height, v: '' };
+    e.preventDefault(); select(img);
+    const f = frameOf(img), r = img.getBoundingClientRect();
+    const w = r.width / f.z, h = r.height / f.z, s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+    const ox = img.naturalWidth * s - w, oy = img.naturalHeight * s - h;
+    /* cuánto se desplaza la foto al cambiar 100 % el punto de enfoque, contando el zoom */
+    drag = { img, x: e.clientX, y: e.clientY, f, kx: ox * f.z + (f.z - 1) * w, ky: oy * f.z + (f.z - 1) * h, v: '' };
     moved = false; img.classList.add('framing');
   });
   window.addEventListener('pointermove', e => {
@@ -1256,9 +1283,10 @@ if (EDIT) {
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
     const lim = v => Math.round(Math.min(100, Math.max(0, v)) * 10) / 10;
-    const x = drag.ox > 1 ? lim(drag.px - dx / drag.ox * 100) : drag.px;
-    const y = drag.oy > 1 ? lim(drag.py - dy / drag.oy * 100) : drag.py;
-    drag.v = `${x}% ${y}%`; drag.img.style.objectPosition = drag.v;
+    const x = Math.abs(drag.kx) > 1 ? lim(drag.f.x - dx / drag.kx * 100) : drag.f.x;
+    const y = Math.abs(drag.ky) > 1 ? lim(drag.f.y - dy / drag.ky * 100) : drag.f.y;
+    drag.v = fmt(x, y, drag.f.z);
+    drag.img.style.objectPosition = drag.img.style.transformOrigin = `${x}% ${y}%`;
   });
   const end = () => {
     if (!drag) return;
@@ -1266,15 +1294,25 @@ if (EDIT) {
     if (moved && drag.v) { edits[drag.img.getAttribute('src')] = drag.v; save(); frameAll(); toast('Encuadre guardado ✓'); }
     drag = null;
   };
+  /* Pellizcar el trackpad o Ctrl/⌘ + rueda del mouse sobre una foto */
+  document.addEventListener('wheel', e => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    const img = pick(e.target); if (!img) return;
+    e.preventDefault(); zoomImg(img, Math.exp(-e.deltaY * .01));
+  }, { passive: false });
   window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
   /* En modo edición las fotos no funcionan como enlace (para abrir un proyecto, pulsa su nombre) */
   document.addEventListener('click', e => { if (moved || pick(e.target)) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
   document.addEventListener('dblclick', e => {
     const img = pick(e.target); if (!img) return;
-    e.preventDefault(); edits[img.getAttribute('src')] = '50% 50%'; save(); frameAll(); toast('Foto centrada de nuevo');
+    e.preventDefault(); edits[img.getAttribute('src')] = '50% 50%'; save(); frameAll(); select(img); toast('Foto centrada de nuevo');
   });
   bar.addEventListener('click', async e => {
     const a = e.target.closest('button'); if (!a) return;
+    if (a.dataset.a === 'in' || a.dataset.a === 'out') {
+      if (!sel || !sel.isConnected) { toast('Primero toca la foto que quieres acercar o alejar'); return; }
+      zoomImg(sel, a.dataset.a === 'in' ? 1.1 : 1 / 1.1); return;
+    }
     if (a.dataset.a === 'reset') {
       if (!confirm('¿Borrar todos los encuadres que hiciste en este navegador?')) return;
       edits = {}; save(); frameAll(); toast('Encuadres borrados'); return;
