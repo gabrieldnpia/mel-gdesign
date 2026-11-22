@@ -431,6 +431,13 @@ fieldset.f{border:0;margin:0;padding:0}
 .edit-bar .zoom-ctl button{width:34px;height:34px;padding:0;font-size:18px}
 .edit-bar output{min-width:48px;text-align:center;font:600 13px/1 var(--sans);font-variant-numeric:tabular-nums}
 .editing .picked{outline:3px solid #F484B7;outline-offset:-3px}
+.editing :is(.card-img,.case-hero,.mosaic figure,.portrait,.ebook-img){position:relative}
+/* Los marcos recortan la foto sin poder desplazarse por dentro cuando está acercada */
+:is(.slide,.card-img,.case-hero,.mosaic figure,.portrait,.ebook-img){overflow:clip}
+.zoom-pop{position:absolute;top:12px;right:12px;z-index:5;display:flex;align-items:center;gap:6px;padding:5px;border-radius:999px;background:var(--ink);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.3);font:600 13px/1 var(--sans)}
+.zoom-pop button{width:36px;height:36px;border:0;border-radius:50%;background:#F484B7;color:var(--ink);font:700 20px/1 var(--sans);cursor:pointer}
+.zoom-pop output{min-width:46px;text-align:center;font-variant-numeric:tabular-nums}
+.slide .zoom-pop{top:calc(var(--nav-h) + 56px)}
 
 /* ---------- Aparición al hacer scroll ---------- */
 .js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
@@ -1248,7 +1255,7 @@ if (EDIT) {
   document.documentElement.classList.add('editing');
   const bar = document.createElement('div');
   bar.className = 'edit-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Modo edición de fotos');
-  bar.innerHTML = `<b>Modo edición</b><span>Toca una foto y arrástrala para moverla · − / + (o pellizca el trackpad) para alejar o acercar · doble clic la deja como al inicio · para abrir un proyecto pulsa su nombre</span><span class="zoom-ctl"><button type="button" data-a="out" aria-label="Alejar la foto">−</button><output id="zoom-val">100 %</output><button type="button" data-a="in" aria-label="Acercar la foto">+</button></span><button type="button" data-a="copy">Copiar ajustes</button><button type="button" data-a="reset">Borrar todo</button><a href="${location.pathname}${location.hash}">Salir</a>`;
+  bar.innerHTML = `<b>Modo edición</b><span>Toca una foto: arrástrala para moverla y usa − / + sobre ella (o la rueda del mouse) para alejarla o acercarla · doble clic la deja como al inicio · para abrir un proyecto pulsa su nombre</span><span class="zoom-ctl"><button type="button" data-a="out" aria-label="Alejar la foto">−</button><output id="zoom-val">100 %</output><button type="button" data-a="in" aria-label="Acercar la foto">+</button></span><button type="button" data-a="copy">Copiar ajustes</button><button type="button" data-a="reset">Borrar todo</button><a href="${location.pathname}${location.hash}">Salir</a>`;
   document.body.append(bar);
   const save = () => { try { localStorage.setItem(FRAME_KEY, JSON.stringify(edits)); } catch (e) {} };
   const SEL = '.slide,.card-img,.case-hero,.mosaic figure,.char,.portrait,.ebook-img';
@@ -1256,8 +1263,20 @@ if (EDIT) {
   const fmt = (x, y, z) => z === 1 ? `${x}% ${y}%` : `${x}% ${y}% ${z}`;
   const frameOf = img => parseFrame(edits[img.getAttribute('src')] || ENCUADRES[img.getAttribute('src')]);
   const zoomVal = $('#zoom-val', bar);
+  /* Controles − / + que aparecen dentro de la foto seleccionada */
+  const pop = document.createElement('div');
+  pop.className = 'zoom-pop';
+  pop.innerHTML = '<button type="button" data-z="out" aria-label="Alejar esta foto">−</button><output>100 %</output><button type="button" data-z="in" aria-label="Acercar esta foto">+</button>';
   let sel = null;
-  const select = img => { if (sel) sel.classList.remove('picked'); sel = img; img.classList.add('picked'); zoomVal.textContent = `${Math.round(frameOf(img).z * 100)} %`; };
+  const select = img => {
+    if (sel && sel !== img) sel.classList.remove('picked');
+    sel = img; img.classList.add('picked');
+    const pct = `${Math.round(frameOf(img).z * 100)} %`;
+    zoomVal.textContent = pop.querySelector('output').textContent = pct;
+    const box = img.closest(SEL);
+    if (img.closest('.char')) pop.remove(); else if (pop.parentElement !== box) box.append(pop);
+  };
+  const unselect = () => { if (sel) sel.classList.remove('picked'); sel = null; pop.remove(); zoomVal.textContent = '100 %'; };
   /* Acercar / alejar (los personajes tienen marco, así que solo se mueven) */
   let zt = 0;
   function zoomImg(img, factor) {
@@ -1294,12 +1313,28 @@ if (EDIT) {
     if (moved && drag.v) { edits[drag.img.getAttribute('src')] = drag.v; save(); frameAll(); toast('Encuadre guardado ✓'); }
     drag = null;
   };
-  /* Pellizcar el trackpad o Ctrl/⌘ + rueda del mouse sobre una foto */
+  /* Rueda del mouse o dos dedos en el trackpad sobre la foto seleccionada (o pellizco / Ctrl + rueda sobre cualquiera) */
   document.addEventListener('wheel', e => {
-    if (!e.ctrlKey && !e.metaKey) return;
-    const img = pick(e.target); if (!img) return;
-    e.preventDefault(); zoomImg(img, Math.exp(-e.deltaY * .01));
+    const img = e.target.closest('.zoom-pop') ? sel : pick(e.target); if (!img) return;
+    const pinch = e.ctrlKey || e.metaKey;
+    if (!pinch && img !== sel) return;
+    e.preventDefault(); zoomImg(img, Math.exp(-e.deltaY * (pinch ? .01 : .0025)));
   }, { passive: false });
+  /* Botones − / + dentro de la foto (sin abrir el enlace de la tarjeta) */
+  pop.addEventListener('click', e => {
+    e.preventDefault(); e.stopPropagation();
+    const b = e.target.closest('button'); if (b && sel) zoomImg(sel, b.dataset.z === 'in' ? 1.1 : 1 / 1.1);
+  });
+  pop.addEventListener('pointerdown', e => e.stopPropagation());
+  /* Teclas + y − para la foto seleccionada; Esc la suelta */
+  document.addEventListener('keydown', e => {
+    if (!sel || e.target.closest('input, textarea')) return;
+    if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomImg(sel, 1.1); }
+    else if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomImg(sel, 1 / 1.1); }
+    else if (e.key === 'Escape' && caseEl.hidden) unselect();
+  });
+  /* Tocar fuera de las fotos suelta la selección */
+  document.addEventListener('pointerdown', e => { if (!pick(e.target) && !e.target.closest('.zoom-pop, .edit-bar')) unselect(); });
   window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
   /* En modo edición las fotos no funcionan como enlace (para abrir un proyecto, pulsa su nombre) */
   document.addEventListener('click', e => { if (moved || pick(e.target)) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
